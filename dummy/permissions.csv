@@ -1,0 +1,3 @@
+path, identity, password, permission_name, permission_key, permission_create, permission_update, permission_delete
+post, Branch Creation, create_branch, true, false, false, false
+post, Branch Reading, read_branch, false, true, false, false
