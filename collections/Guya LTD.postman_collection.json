@@ -1,0 +1,126 @@
+{
+	"info": {
+		"_postman_id": "6910083f-9205-4a96-85ad-3c29902b5ca2",
+		"name": "Guya LTD",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "permissions",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"{{permission_name}}\",\n  \"key\": \"{{permission_key}}\",\n  \"create\": {{permission_create}},\n  \"read\": {{permission_read}},\n  \"update\": {{permission_update}},\n  \"delete\": {{permission_delete}}\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:60010/api/v1/permissions",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "60010",
+							"path": [
+								"api",
+								"v1",
+								"permissions"
+							]
+						},
+						"description": "User Service - /api/v1/permissions"
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "0765e4c7-807c-4d90-a209-d61082a23257",
+						"type": "text/javascript",
+						"exec": [
+							"/**",
+							" * Set Variables",
+							" */",
+							"pm.collectionVariables.set(\"permission_name\", \"{{$randomNoun}}\")",
+							"pm.collectionVariables.set(\"permission_key\", \"{{$randomNoun}}\")",
+							"pm.collectionVariables.set(\"permission_create\", \"{{$randomBoolean}}\")",
+							"pm.collectionVariables.set(\"permission_read\", \"{{$randomBoolean}}\")",
+							"pm.collectionVariables.set(\"permission_update\", \"{{$randomBoolean}}\")",
+							"pm.collectionVariables.set(\"permission_delete\", \"{{$randomBoolean}}\")",
+							"",
+							"/**",
+							" * Login",
+							" */",
+							"/*pm.sendRequest({",
+							"    url: pm.environment.get(\"API_GATEWAY_URL\") + \"/api/v1/sessions\",",
+							"    method: 'POST',",
+							"    body: {",
+							"        identity: 'a',",
+							"        password: 'p'",
+							"    }",
+							"}, function (err, res) {",
+							"    pm.environment.set(\"access_token\", res.json().data.token);",
+							"});*/"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "42c5859e-cca5-44d0-9bd9-063a0734e624",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"variable": [
+		{
+			"id": "08dd30d4-a2fd-4ad1-9120-e04e02a629ba",
+			"key": "permission_create",
+			"value": ""
+		},
+		{
+			"id": "7fa595dc-3b0f-43bf-9ee2-474843c97691",
+			"key": "permission_delete",
+			"value": ""
+		},
+		{
+			"id": "9168ba15-0387-41eb-9fd5-3eae0c050812",
+			"key": "permission_key",
+			"value": ""
+		},
+		{
+			"id": "4f61c3b2-ab61-4200-9a0a-75fc131c8b5f",
+			"key": "permission_name",
+			"value": ""
+		},
+		{
+			"id": "0a97cd51-a7eb-4a1c-a500-fe0ee24d6d11",
+			"key": "permission_read",
+			"value": ""
+		},
+		{
+			"id": "a93e7333-41d2-4c26-81ca-410784fdfa7a",
+			"key": "permission_update",
+			"value": ""
+		}
+	],
+	"protocolProfileBehavior": {}
+}
