@@ -1,0 +1,11 @@
+[
+    {
+        "path": "post",
+        "permission_name": "Branch Creation",
+        "permission_key": "create_branch",
+        "permission_create": true,
+        "permission_read": false,
+        "permission_update": false,
+        "permission_delete": false
+    }
+]
