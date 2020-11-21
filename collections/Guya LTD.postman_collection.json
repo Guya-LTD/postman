@@ -63,7 +63,7 @@
 							"/**",
 							" * Login",
 							" */",
-							"/*pm.sendRequest({",
+							"pm.sendRequest({",
 							"    url: pm.environment.get(\"API_GATEWAY_URL\") + \"/api/v1/sessions\",",
 							"    method: 'POST',",
 							"    body: {",
@@ -72,7 +72,9 @@
 							"    }",
 							"}, function (err, res) {",
 							"    pm.environment.set(\"access_token\", res.json().data.token);",
-							"});*/"
+							"    // Set Authorization Header",
+							"    pm.variables.set('access_token', res.json().data.token);",
+							"});"
 						]
 					}
 				},
@@ -88,36 +90,113 @@
 				}
 			],
 			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Gatekeeper",
+			"item": [
+				{
+					"name": "sessions",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"identity\": \"postman@localhost.com\",\n    \"password\": \"postman123456789\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:60007/api/v1/sessions",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "60007",
+							"path": [
+								"api",
+								"v1",
+								"sessions"
+							]
+						},
+						"description": "sessions - /api/v1/sessions"
+					},
+					"response": []
+				},
+				{
+					"name": "sessions/",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdGF0dXNfY29kZSI6MjAwLCJzdGF0dXMiOiJPSyIsIm1lc3NhZ2UiOiJDcmVkZW50aWFsIG1hdGNoZWQifQ.C0NXhvJWuh8XXcrMS0P60CHjpZzeM4bWp3ivkm1Vb4k",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:60007/api/v1/sessions/0",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "60007",
+							"path": [
+								"api",
+								"v1",
+								"sessions",
+								"0"
+							]
+						},
+						"description": "sessions - /api/v1/sessions/{id}"
+					},
+					"response": []
+				}
+			],
+			"description": "Gatekeeper Service",
+			"protocolProfileBehavior": {}
 		}
 	],
 	"variable": [
 		{
-			"id": "08dd30d4-a2fd-4ad1-9120-e04e02a629ba",
+			"id": "8c42850e-ec2b-4915-84cc-67e3b097ff40",
 			"key": "permission_create",
 			"value": ""
 		},
 		{
-			"id": "7fa595dc-3b0f-43bf-9ee2-474843c97691",
+			"id": "c6ea08f4-6d21-434a-aa50-59eb2d387e28",
 			"key": "permission_delete",
 			"value": ""
 		},
 		{
-			"id": "9168ba15-0387-41eb-9fd5-3eae0c050812",
+			"id": "7ee90e65-3325-49ac-a443-0d6b2b1cd1ba",
 			"key": "permission_key",
 			"value": ""
 		},
 		{
-			"id": "4f61c3b2-ab61-4200-9a0a-75fc131c8b5f",
+			"id": "a1fdee57-a3c4-4288-af51-d897ccfa8a6e",
 			"key": "permission_name",
 			"value": ""
 		},
 		{
-			"id": "0a97cd51-a7eb-4a1c-a500-fe0ee24d6d11",
+			"id": "2d4fcc42-d606-470d-8d33-64a64a8fe983",
 			"key": "permission_read",
 			"value": ""
 		},
 		{
-			"id": "a93e7333-41d2-4c26-81ca-410784fdfa7a",
+			"id": "1b9e4818-d9ee-43d8-9d0a-7ed90485ee1a",
 			"key": "permission_update",
 			"value": ""
 		}
