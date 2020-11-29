@@ -9,179 +9,452 @@
 			"name": "User",
 			"item": [
 				{
-					"name": "permissions",
-					"event": [
+					"name": "roles",
+					"item": [
 						{
-							"listen": "prerequest",
-							"script": {
-								"id": "754b7e3f-fe8b-4557-85fe-7774c4d514e9",
-								"exec": [
-									"/**",
-									" * Login",
-									" */",
-									"/*pm.sendRequest({",
-									"    url: pm.environment.get(\"API_GATEWAY_URL\") + \"/api/v1/sessions\",",
-									"    method: 'POST',",
-									"    body: {",
-									"        identity: 'a',",
-									"        password: 'p'",
-									"    }",
-									"}, function (err, res) {",
-									"    //pm.environment.set(\"access_token\", res.json().data.token);",
-									"    // Set Authorization Header",
-									"    pm.variables.set('access_token', res.json().data.token);",
-									"});*/"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"name\": \"{{permission_name}}\",\n  \"key\": \"{{permission_key}}\",\n  \"create\": {{permission_create}},\n  \"read\": {{permission_read}},\n  \"update\": {{permission_update}},\n  \"delete\": {{permission_delete}}\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"name": "roles",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:60010/api/v1/roles",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60010",
+									"path": [
+										"api",
+										"v1",
+										"roles"
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "http://127.0.0.1:60010/api/v1/permissions",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "60010",
-							"path": [
-								"api",
-								"v1",
-								"permissions"
-							]
-						},
-						"description": "User Service - /api/v1/permissions"
-					},
-					"response": []
-				},
-				{
-					"name": "permissions",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://127.0.0.1:60010/api/v1/permissions?limit=20",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "60010",
-							"path": [
-								"api",
-								"v1",
-								"permissions"
-							],
-							"query": [
+						{
+							"name": "roles",
+							"event": [
 								{
-									"key": "limit",
-									"value": "20"
+									"listen": "prerequest",
+									"script": {
+										"id": "d1facbaa-3ad8-4486-bbaf-a0e394940ca0",
+										"exec": [
+											"/**",
+											" * Login",
+											" */",
+											"/*pm.sendRequest({",
+											"    url: pm.environment.get(\"API_GATEWAY_URL\") + \"/api/v1/sessions\",",
+											"    method: 'POST',",
+											"    body: {",
+											"        identity: 'a',",
+											"        password: 'p'",
+											"    }",
+											"}, function (err, res) {",
+											"    // Set Authorization Header",
+											"    pm.variables.set('token', res.json().data.token);",
+											"});*/"
+										],
+										"type": "text/javascript"
+									}
 								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "permissions/",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://127.0.0.1:60010/api/v1/permissions/1",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
 							],
-							"port": "60010",
-							"path": [
-								"api",
-								"v1",
-								"permissions",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "permissions/",
-					"event": [
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"{{role_name}}\",\n    \"uti\": \"{{role_uti}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:60010/api/v1/roles",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60010",
+									"path": [
+										"api",
+										"v1",
+										"roles"
+									]
+								}
+							},
+							"response": []
+						},
 						{
-							"listen": "prerequest",
-							"script": {
-								"id": "e211f333-3072-4e53-94fe-8586ee15e323",
-								"exec": [
-									"/**",
-									" * Login",
-									" */",
-									"/*pm.sendRequest({",
-									"    url: pm.environment.get(\"API_GATEWAY_URL\") + \"/api/v1/sessions\",",
-									"    method: 'POST',",
-									"    body: {",
-									"        identity: 'a',",
-									"        password: 'p'",
-									"    }",
-									"}, function (err, res) {",
-									"    //pm.environment.set(\"access_token\", res.json().data.token);",
-									"    // Set Authorization Header",
-									"    pm.variables.set('access_token', res.json().data.token);",
-									"});*/"
-								],
-								"type": "text/javascript"
-							}
+							"name": "roles/",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:60010/api/v1/roles/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60010",
+									"path": [
+										"api",
+										"v1",
+										"roles",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "roles/",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "4cc69338-5acc-47a6-9e09-d7f4ad322133",
+										"exec": [
+											"/**",
+											" * Login",
+											" */",
+											"/*pm.sendRequest({",
+											"    url: pm.environment.get(\"API_GATEWAY_URL\") + \"/api/v1/sessions\",",
+											"    method: 'POST',",
+											"    body: {",
+											"        identity: 'a',",
+											"        password: 'p'",
+											"    }",
+											"}, function (err, res) {",
+											"    // Set Authorization Header",
+											"    pm.variables.set('token', res.json().data.token);",
+											"});*/"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"{{role_name}}\",\n    \"uti\": \"{{role_uti}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:60010/api/v1/roles/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60010",
+									"path": [
+										"api",
+										"v1",
+										"roles",
+										"1"
+									]
+								}
+							},
+							"response": []
 						}
 					],
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n  \"name\": \"{{permission_name}}\",\n  \"key\": \"{{permission_key}}\",\n  \"create\": {{permission_create}},\n  \"read\": {{permission_read}},\n  \"update\": {{permission_update}},\n  \"delete\": {{permission_delete}}\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "permissions",
+					"item": [
+						{
+							"name": "permissions",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:60010/api/v1/permissions?limit=10",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60010",
+									"path": [
+										"api",
+										"v1",
+										"permissions"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "10"
+										}
+									]
 								}
-							}
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "http://127.0.0.1:60010/api/v1/permissions/1",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+						{
+							"name": "permissions",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "754b7e3f-fe8b-4557-85fe-7774c4d514e9",
+										"exec": [
+											"/**",
+											" * Login",
+											" */",
+											"/*pm.sendRequest({",
+											"    url: pm.environment.get(\"API_GATEWAY_URL\") + \"/api/v1/sessions\",",
+											"    method: 'POST',",
+											"    body: {",
+											"        identity: 'a',",
+											"        password: 'p'",
+											"    }",
+											"}, function (err, res) {",
+											"    // Set Authorization Header",
+											"    pm.variables.set('token', res.json().data.token);",
+											"});*/"
+										],
+										"type": "text/javascript"
+									}
+								}
 							],
-							"port": "60010",
-							"path": [
-								"api",
-								"v1",
-								"permissions",
-								"1"
-							]
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"{{permission_name}}\",\n  \"key\": \"{{permission_key}}\",\n  \"create\": {{permission_create}},\n  \"read\": {{permission_read}},\n  \"update\": {{permission_update}},\n  \"delete\": {{permission_delete}}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:60010/api/v1/permissions",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60010",
+									"path": [
+										"api",
+										"v1",
+										"permissions"
+									]
+								},
+								"description": "User Service - /api/v1/permissions"
+							},
+							"response": []
+						},
+						{
+							"name": "permissions/",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:60010/api/v1/permissions/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60010",
+									"path": [
+										"api",
+										"v1",
+										"permissions",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "permissions/",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "e211f333-3072-4e53-94fe-8586ee15e323",
+										"exec": [
+											"/**",
+											" * Login",
+											" */",
+											"/*pm.sendRequest({",
+											"    url: pm.environment.get(\"API_GATEWAY_URL\") + \"/api/v1/sessions\",",
+											"    method: 'POST',",
+											"    body: {",
+											"        identity: 'a',",
+											"        password: 'p'",
+											"    }",
+											"}, function (err, res) {",
+											"    //pm.environment.set(\"access_token\", res.json().data.token);",
+											"    // Set Authorization Header",
+											"    pm.variables.set('access_token', res.json().data.token);",
+											"});*/"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"{{permission_name}}\",\n  \"key\": \"{{permission_key}}\",\n  \"create\": {{permission_create}},\n  \"read\": {{permission_read}},\n  \"update\": {{permission_update}},\n  \"delete\": {{permission_delete}}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:60010/api/v1/permissions/1",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60010",
+									"path": [
+										"api",
+										"v1",
+										"permissions",
+										"1"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "users",
+					"item": [
+						{
+							"name": "users",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:60010/api/v1/users",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60010",
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "users",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": {{user_name}},\n    \"identity\": {{user_identity}},\n    \"password\": {{user_password}},\n    \"uti\": {{user_uit}},\n    \"email\": {{user_email}},\n    \"pnum\": {{user_pnum}}\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:60010/api/v1/users",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60010",
+									"path": [
+										"api",
+										"v1",
+										"users"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
 				}
 			],
 			"event": [
@@ -194,12 +467,26 @@
 							"/**",
 							" * Set Variables",
 							" */",
+							"",
+							"// Permissions",
 							"pm.collectionVariables.set(\"permission_name\", \"{{$randomNoun}}\")",
 							"pm.collectionVariables.set(\"permission_key\", \"{{$randomNoun}}\")",
 							"pm.collectionVariables.set(\"permission_create\", \"{{$randomBoolean}}\")",
 							"pm.collectionVariables.set(\"permission_read\", \"{{$randomBoolean}}\")",
 							"pm.collectionVariables.set(\"permission_update\", \"{{$randomBoolean}}\")",
-							"pm.collectionVariables.set(\"permission_delete\", \"{{$randomBoolean}}\")"
+							"pm.collectionVariables.set(\"permission_delete\", \"{{$randomBoolean}}\")",
+							"",
+							"// Roles",
+							"pm.collectionVariables.set(\"role_name\", \"{{$randomNoun}}\")",
+							"pm.collectionVariables.set(\"role_uti\", \"{{$randomNoun}}\")",
+							"",
+							"// User",
+							"pm.collectionVariables.set(\"user_name\", \"{{$randomFullName}}\")",
+							"pm.collectionVariables.set(\"user_identity\", \"{{$randomUserName}}\")",
+							"pm.collectionVariables.set(\"user_password\", \"{{$randomPassword}}\")",
+							"pm.collectionVariables.set(\"user_uti\", \"{{$randomNoun\")",
+							"pm.collectionVariables.set(\"user_email\", \"{{randomEmail}}\")",
+							"pm.collectionVariables.set(\"user_pnum\", \"{{$randomPhoneNumberExt}}\")"
 						]
 					}
 				},
@@ -221,73 +508,80 @@
 			"item": [
 				{
 					"name": "sessions",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"identity\": \"postman@localhost.com\",\n    \"password\": \"postman123456789\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+					"item": [
+						{
+							"name": "sessions",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"identity\": \"postman@localhost.com\",\n    \"password\": \"postman123456789\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:60007/api/v1/sessions",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60007",
+									"path": [
+										"api",
+										"v1",
+										"sessions"
+									]
+								},
+								"description": "sessions - /api/v1/sessions"
+							},
+							"response": []
 						},
-						"url": {
-							"raw": "http://127.0.0.1:60007/api/v1/sessions",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "60007",
-							"path": [
-								"api",
-								"v1",
-								"sessions"
-							]
-						},
-						"description": "sessions - /api/v1/sessions"
-					},
-					"response": []
-				},
-				{
-					"name": "sessions/",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdGF0dXNfY29kZSI6MjAwLCJzdGF0dXMiOiJPSyIsIm1lc3NhZ2UiOiJDcmVkZW50aWFsIG1hdGNoZWQifQ.C0NXhvJWuh8XXcrMS0P60CHjpZzeM4bWp3ivkm1Vb4k",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "http://127.0.0.1:60007/api/v1/sessions/0",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "60007",
-							"path": [
-								"api",
-								"v1",
-								"sessions",
-								"0"
-							]
-						},
-						"description": "sessions - /api/v1/sessions/{id}"
-					},
-					"response": []
+						{
+							"name": "sessions/",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdGF0dXNfY29kZSI6MjAwLCJzdGF0dXMiOiJPSyIsIm1lc3NhZ2UiOiJDcmVkZW50aWFsIG1hdGNoZWQifQ.C0NXhvJWuh8XXcrMS0P60CHjpZzeM4bWp3ivkm1Vb4k",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:60007/api/v1/sessions/0",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60007",
+									"path": [
+										"api",
+										"v1",
+										"sessions",
+										"0"
+									]
+								},
+								"description": "sessions - /api/v1/sessions/{id}"
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
 				}
 			],
 			"description": "Gatekeeper Service",
@@ -334,7 +628,19 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": ""
+							"raw": "127.0.0.1:50000/api/v1/permissions",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "50000",
+							"path": [
+								"api",
+								"v1",
+								"permissions"
+							]
 						}
 					},
 					"response": []
@@ -345,33 +651,73 @@
 	],
 	"variable": [
 		{
-			"id": "a189a3ab-6ff2-4e5b-9f9e-f3102a9e921b",
+			"id": "e159e94d-257a-46e2-8d3c-21a562563978",
 			"key": "permission_create",
 			"value": ""
 		},
 		{
-			"id": "fd9f581c-93a0-4ccf-9a0f-05f965121d8a",
+			"id": "7b4c02e4-03cd-4aa8-9bdc-80986862ca26",
 			"key": "permission_delete",
 			"value": ""
 		},
 		{
-			"id": "973ff5e0-d736-4f37-914d-416893dceb86",
+			"id": "06f00aa3-157a-41fa-8536-84da8cc8b829",
 			"key": "permission_key",
 			"value": ""
 		},
 		{
-			"id": "a43ac93e-e780-435c-a342-90eeda3badd5",
+			"id": "48d4b870-f62b-426c-a5a5-9194939e2ce8",
 			"key": "permission_name",
 			"value": ""
 		},
 		{
-			"id": "b304c4df-cfed-45ce-90f3-f24fc99ba1c5",
+			"id": "275cc138-bf24-4075-a061-051185f73b77",
 			"key": "permission_read",
 			"value": ""
 		},
 		{
-			"id": "a6ca0ba5-dc97-4a61-b31d-c8fff76ebf85",
+			"id": "6c9022a1-4ed7-49d6-ab06-b33a54c3142e",
 			"key": "permission_update",
+			"value": ""
+		},
+		{
+			"id": "d8c00dd2-05fa-4d31-8438-5b55a02f40f8",
+			"key": "role_name",
+			"value": ""
+		},
+		{
+			"id": "8b584c8b-d1b4-4e3b-a594-c3612dea01ca",
+			"key": "role_uti",
+			"value": ""
+		},
+		{
+			"id": "604d248d-8164-4fb7-bbda-4bbf39d1ec1f",
+			"key": "user_email",
+			"value": ""
+		},
+		{
+			"id": "2e2d4194-1e38-44da-83aa-59a4d97ddc69",
+			"key": "user_identity",
+			"value": ""
+		},
+		{
+			"id": "350f7e44-c59a-4f5d-abd9-fa8e444dad7c",
+			"key": "user_name",
+			"value": ""
+		},
+		{
+			"id": "ee9251be-2919-410e-8473-3b3ed742e47a",
+			"key": "user_password",
+			"value": ""
+		},
+		{
+			"id": "cd183303-6683-424c-815c-58e547f57d06",
+			"key": "user_pnum",
+			"value": ""
+		},
+		{
+			"id": "f83b0813-6d5f-48a1-812e-6c5d797de188",
+			"key": "user_uti",
 			"value": ""
 		}
 	],
