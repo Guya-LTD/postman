@@ -17,7 +17,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://127.0.0.1:60010/api/v1/roles",
+									"raw": "http://127.0.0.1:60010/api/v1/roles?limit=10",
 									"protocol": "http",
 									"host": [
 										"127",
@@ -30,6 +30,12 @@
 										"api",
 										"v1",
 										"roles"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "10"
+										}
 									]
 								}
 							},
@@ -43,20 +49,38 @@
 									"script": {
 										"id": "d1facbaa-3ad8-4486-bbaf-a0e394940ca0",
 										"exec": [
-											"/**",
-											" * Login",
-											" */",
-											"/*pm.sendRequest({",
-											"    url: pm.environment.get(\"API_GATEWAY_URL\") + \"/api/v1/sessions\",",
-											"    method: 'POST',",
-											"    body: {",
-											"        identity: 'a',",
-											"        password: 'p'",
+											"pm.collectionVariables.set(\"role_name\", \"{{$randomNoun}}\")",
+											"pm.collectionVariables.set(\"role_uti\", \"{{$randomNoun}}\")",
+											"",
+											"var role_permissions_var = [",
+											"    {",
+											"        \"permission_name\": \"{{$randomNoun}}\",",
+											"        \"permission_key\": \"{{$randomNoun}}\",",
+											"        \"permission_create\": \"{{$randomBoolean}}\",",
+											"        \"permission_read\": \"{{$randomBoolean}}\",",
+											"        \"permission_update\": \"{{$randomBoolean}}\",",
+											"        \"permission_delete\": \"{{$randomBoolean}}\"",
 											"    }",
-											"}, function (err, res) {",
-											"    // Set Authorization Header",
-											"    pm.variables.set('token', res.json().data.token);",
-											"});*/"
+											"]",
+											"",
+											"if(!data.role_permissions){",
+											"    // No Runner",
+											"    pm.collectionVariables.set(\"roles_permissions\", JSON.stringify(role_permissions_var))",
+											"}else {",
+											"    pm.collectionVariables.set(\"roles_permissions\", JSON.stringify(data.role_permissions))",
+											"}"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "c3160f33-428e-4cff-969b-f88296e3ff54",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"  pm.response.to.have.status(201);",
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -77,7 +101,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"name\": \"{{role_name}}\",\n    \"uti\": \"{{role_uti}}\",\n    \"permissions\": [\n        {\n            \"name\": \"{{permission_name}}\",\n            \"key\": \"{{permission_key}}\",\n            \"create\": {{permission_create}},\n            \"read\": {{permission_read}},\n            \"update\": {{permission_update}},\n            \"delete\": {{permission_delete}}\n            }\n    ]\n}",
+									"raw": "{\n    \"name\": \"{{role_name}}\",\n    \"uti\": \"{{role_uti}}\",\n    \"permissions\": {{roles_permissions}}\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -196,6 +220,31 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "roles/",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:60010/api/v1/roles/80",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60010",
+									"path": [
+										"api",
+										"v1",
+										"roles",
+										"80"
+									]
+								}
+							},
+							"response": []
 						}
 					],
 					"event": [
@@ -205,17 +254,7 @@
 								"id": "fd074a5e-cd1b-4348-9233-163bcca40c17",
 								"type": "text/javascript",
 								"exec": [
-									"// Permissions",
-									"pm.collectionVariables.set(\"permission_name\", \"{{$randomNoun}}\")",
-									"pm.collectionVariables.set(\"permission_key\", \"{{$randomNoun}}\")",
-									"pm.collectionVariables.set(\"permission_create\", \"{{$randomBoolean}}\")",
-									"pm.collectionVariables.set(\"permission_read\", \"{{$randomBoolean}}\")",
-									"pm.collectionVariables.set(\"permission_update\", \"{{$randomBoolean}}\")",
-									"pm.collectionVariables.set(\"permission_delete\", \"{{$randomBoolean}}\")",
-									"",
-									"// Roles",
-									"pm.collectionVariables.set(\"role_name\", \"{{$randomNoun}}\")",
-									"pm.collectionVariables.set(\"role_uti\", \"{{$randomNoun}}\")"
+									""
 								]
 							}
 						},
@@ -457,6 +496,20 @@
 					"item": [
 						{
 							"name": "users",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "cb2486be-b7aa-449c-9b35-bf3d0a8f6de1",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"  pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "GET",
 								"header": [],
@@ -481,12 +534,26 @@
 						},
 						{
 							"name": "users",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "7802e9af-592b-4660-96b3-697517905f36",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"  pm.response.to.have.status(201);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"request": {
 								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"name\": \"{{user_name}}\",\n    \"identity\": \"{{user_identity}}\",\n    \"password\": \"{{user_password}}\",\n    \"uti\": \"{{user_uit}}\",\n    \"email\": \"{{user_email}}\",\n    \"pnum\": \"{{user_pnum}}\"\n}",
+									"raw": "{\n    \"name\": \"{{user_name}}\",\n    \"identity\": \"{{user_identity}}\",\n    \"password\": \"{{user_password}}\",\n    \"uti\": \"bandwidth\",\n    \"email\": \"{{user_email}}\",\n    \"pnum\": \"{{user_pnum}}\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -525,8 +592,8 @@
 									"pm.collectionVariables.set(\"user_identity\", \"{{$randomUserName}}\")",
 									"pm.collectionVariables.set(\"user_password\", \"{{$randomPassword}}\")",
 									"pm.collectionVariables.set(\"user_uti\", \"{{$randomNoun\")",
-									"pm.collectionVariables.set(\"user_email\", \"{{randomEmail}}\")",
-									"pm.collectionVariables.set(\"user_pnum\", \"{{$randomPhoneNumberExt}}\")"
+									"pm.collectionVariables.set(\"user_email\", \"{{$randomEmail}}\")",
+									"pm.collectionVariables.set(\"user_pnum\", \"+251934343343\")"
 								]
 							}
 						},
@@ -539,6 +606,46 @@
 									""
 								]
 							}
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "credentials",
+					"item": [
+						{
+							"name": "credentials",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"identity\": \"admin0@localhost.com\",\n    \"password\": \"admin\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:60010/api/v1/credentials",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60010",
+									"path": [
+										"api",
+										"v1",
+										"credentials"
+									]
+								}
+							},
+							"response": []
 						}
 					],
 					"protocolProfileBehavior": {},
@@ -715,75 +822,42 @@
 			"protocolProfileBehavior": {}
 		}
 	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "6d806259-33d2-4c1a-808f-e88c17f28600",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "6b0055cd-97b3-4530-a953-7dda570553e0",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
 	"variable": [
 		{
-			"id": "cb9e32fb-e5c3-4e2a-82f7-e4cd3503457a",
-			"key": "permission_create",
-			"value": ""
-		},
-		{
-			"id": "87c7643e-3cbc-49fc-b874-85923f3e1b65",
-			"key": "permission_delete",
-			"value": ""
-		},
-		{
-			"id": "c4ad2c65-217c-4f84-bfa8-6ed62411403f",
-			"key": "permission_key",
-			"value": ""
-		},
-		{
-			"id": "c860bd0e-14db-4ed3-bdc5-6320a6a77f14",
-			"key": "permission_name",
-			"value": ""
-		},
-		{
-			"id": "113d521d-5cc8-4ea7-bab1-6b94019c8e61",
-			"key": "permission_read",
-			"value": ""
-		},
-		{
-			"id": "2682528d-4224-4eb5-8954-d5fbaae82c4e",
-			"key": "permission_update",
-			"value": ""
-		},
-		{
-			"id": "f8df79f0-fba3-4600-b6b7-202c6a5fe90d",
+			"id": "45c95275-ec2b-4e8c-9dee-3839e9424f9b",
 			"key": "role_name",
 			"value": ""
 		},
 		{
-			"id": "c0ba2400-af6a-4cbc-9e7d-d0533c88c01a",
+			"id": "092cf7ee-fd0f-44c1-abb3-574205fc13b8",
 			"key": "role_uti",
 			"value": ""
 		},
 		{
-			"id": "7b8e5eca-4e3f-47aa-b043-2954c4ed6b39",
-			"key": "user_email",
-			"value": ""
-		},
-		{
-			"id": "3a1c3e19-0a62-4239-b655-ca7b8fb7041a",
-			"key": "user_identity",
-			"value": ""
-		},
-		{
-			"id": "106be033-a924-4bbd-8d29-002292f5ae61",
-			"key": "user_name",
-			"value": ""
-		},
-		{
-			"id": "fa74d3eb-ef04-4940-81b1-d3ff890d47dc",
-			"key": "user_password",
-			"value": ""
-		},
-		{
-			"id": "8ffedc63-b5e4-4275-8491-59e3fb922919",
-			"key": "user_pnum",
-			"value": ""
-		},
-		{
-			"id": "71485d46-b4bb-423e-bcd0-45b5b98d2258",
-			"key": "user_uti",
+			"id": "f9a5f58d-77bb-4d78-912e-ea22e4c14f8a",
+			"key": "roles_permissions",
 			"value": ""
 		}
 	],
