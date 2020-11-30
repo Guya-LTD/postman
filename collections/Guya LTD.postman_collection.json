@@ -77,7 +77,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"name\": \"{{role_name}}\",\n    \"uti\": \"{{role_uti}}\"\n}",
+									"raw": "{\n    \"name\": \"{{role_name}}\",\n    \"uti\": \"{{role_uti}}\",\n    \"permissions\": [\n        {\n            \"name\": \"{{permission_name}}\",\n            \"key\": \"{{permission_key}}\",\n            \"create\": {{permission_create}},\n            \"read\": {{permission_read}},\n            \"update\": {{permission_update}},\n            \"delete\": {{permission_delete}}\n            }\n    ]\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -196,6 +196,38 @@
 								}
 							},
 							"response": []
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "fd074a5e-cd1b-4348-9233-163bcca40c17",
+								"type": "text/javascript",
+								"exec": [
+									"// Permissions",
+									"pm.collectionVariables.set(\"permission_name\", \"{{$randomNoun}}\")",
+									"pm.collectionVariables.set(\"permission_key\", \"{{$randomNoun}}\")",
+									"pm.collectionVariables.set(\"permission_create\", \"{{$randomBoolean}}\")",
+									"pm.collectionVariables.set(\"permission_read\", \"{{$randomBoolean}}\")",
+									"pm.collectionVariables.set(\"permission_update\", \"{{$randomBoolean}}\")",
+									"pm.collectionVariables.set(\"permission_delete\", \"{{$randomBoolean}}\")",
+									"",
+									"// Roles",
+									"pm.collectionVariables.set(\"role_name\", \"{{$randomNoun}}\")",
+									"pm.collectionVariables.set(\"role_uti\", \"{{$randomNoun}}\")"
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "49e35807-45eb-453b-b03a-20a666e1b703",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
 						}
 					],
 					"protocolProfileBehavior": {},
@@ -389,6 +421,34 @@
 							"response": []
 						}
 					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "8cc3df58-d9a4-4e0b-b5dd-152cd24f9437",
+								"type": "text/javascript",
+								"exec": [
+									"// Permissions",
+									"pm.collectionVariables.set(\"permission_name\", \"{{$randomNoun}}\")",
+									"pm.collectionVariables.set(\"permission_key\", \"{{$randomNoun}}\")",
+									"pm.collectionVariables.set(\"permission_create\", \"{{$randomBoolean}}\")",
+									"pm.collectionVariables.set(\"permission_read\", \"{{$randomBoolean}}\")",
+									"pm.collectionVariables.set(\"permission_update\", \"{{$randomBoolean}}\")",
+									"pm.collectionVariables.set(\"permission_delete\", \"{{$randomBoolean}}\")"
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "339c87ab-9639-4072-bdc7-778a3db973c4",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
 					"protocolProfileBehavior": {},
 					"_postman_isSubFolder": true
 				},
@@ -426,7 +486,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"name\": {{user_name}},\n    \"identity\": {{user_identity}},\n    \"password\": {{user_password}},\n    \"uti\": {{user_uit}},\n    \"email\": {{user_email}},\n    \"pnum\": {{user_pnum}}\n}",
+									"raw": "{\n    \"name\": \"{{user_name}}\",\n    \"identity\": \"{{user_identity}}\",\n    \"password\": \"{{user_password}}\",\n    \"uti\": \"{{user_uit}}\",\n    \"email\": \"{{user_email}}\",\n    \"pnum\": \"{{user_pnum}}\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -453,6 +513,34 @@
 							"response": []
 						}
 					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"id": "a5e47f08-f809-4179-a7d2-8a50efd311c9",
+								"type": "text/javascript",
+								"exec": [
+									"// User",
+									"pm.collectionVariables.set(\"user_name\", \"{{$randomFullName}}\")",
+									"pm.collectionVariables.set(\"user_identity\", \"{{$randomUserName}}\")",
+									"pm.collectionVariables.set(\"user_password\", \"{{$randomPassword}}\")",
+									"pm.collectionVariables.set(\"user_uti\", \"{{$randomNoun\")",
+									"pm.collectionVariables.set(\"user_email\", \"{{randomEmail}}\")",
+									"pm.collectionVariables.set(\"user_pnum\", \"{{$randomPhoneNumberExt}}\")"
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"id": "be078720-cff7-4c41-93a3-8aa835a1f6a9",
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					],
 					"protocolProfileBehavior": {},
 					"_postman_isSubFolder": true
 				}
@@ -464,29 +552,7 @@
 						"id": "0765e4c7-807c-4d90-a209-d61082a23257",
 						"type": "text/javascript",
 						"exec": [
-							"/**",
-							" * Set Variables",
-							" */",
-							"",
-							"// Permissions",
-							"pm.collectionVariables.set(\"permission_name\", \"{{$randomNoun}}\")",
-							"pm.collectionVariables.set(\"permission_key\", \"{{$randomNoun}}\")",
-							"pm.collectionVariables.set(\"permission_create\", \"{{$randomBoolean}}\")",
-							"pm.collectionVariables.set(\"permission_read\", \"{{$randomBoolean}}\")",
-							"pm.collectionVariables.set(\"permission_update\", \"{{$randomBoolean}}\")",
-							"pm.collectionVariables.set(\"permission_delete\", \"{{$randomBoolean}}\")",
-							"",
-							"// Roles",
-							"pm.collectionVariables.set(\"role_name\", \"{{$randomNoun}}\")",
-							"pm.collectionVariables.set(\"role_uti\", \"{{$randomNoun}}\")",
-							"",
-							"// User",
-							"pm.collectionVariables.set(\"user_name\", \"{{$randomFullName}}\")",
-							"pm.collectionVariables.set(\"user_identity\", \"{{$randomUserName}}\")",
-							"pm.collectionVariables.set(\"user_password\", \"{{$randomPassword}}\")",
-							"pm.collectionVariables.set(\"user_uti\", \"{{$randomNoun\")",
-							"pm.collectionVariables.set(\"user_email\", \"{{randomEmail}}\")",
-							"pm.collectionVariables.set(\"user_pnum\", \"{{$randomPhoneNumberExt}}\")"
+							""
 						]
 					}
 				},
@@ -651,72 +717,72 @@
 	],
 	"variable": [
 		{
-			"id": "e159e94d-257a-46e2-8d3c-21a562563978",
+			"id": "cb9e32fb-e5c3-4e2a-82f7-e4cd3503457a",
 			"key": "permission_create",
 			"value": ""
 		},
 		{
-			"id": "7b4c02e4-03cd-4aa8-9bdc-80986862ca26",
+			"id": "87c7643e-3cbc-49fc-b874-85923f3e1b65",
 			"key": "permission_delete",
 			"value": ""
 		},
 		{
-			"id": "06f00aa3-157a-41fa-8536-84da8cc8b829",
+			"id": "c4ad2c65-217c-4f84-bfa8-6ed62411403f",
 			"key": "permission_key",
 			"value": ""
 		},
 		{
-			"id": "48d4b870-f62b-426c-a5a5-9194939e2ce8",
+			"id": "c860bd0e-14db-4ed3-bdc5-6320a6a77f14",
 			"key": "permission_name",
 			"value": ""
 		},
 		{
-			"id": "275cc138-bf24-4075-a061-051185f73b77",
+			"id": "113d521d-5cc8-4ea7-bab1-6b94019c8e61",
 			"key": "permission_read",
 			"value": ""
 		},
 		{
-			"id": "6c9022a1-4ed7-49d6-ab06-b33a54c3142e",
+			"id": "2682528d-4224-4eb5-8954-d5fbaae82c4e",
 			"key": "permission_update",
 			"value": ""
 		},
 		{
-			"id": "d8c00dd2-05fa-4d31-8438-5b55a02f40f8",
+			"id": "f8df79f0-fba3-4600-b6b7-202c6a5fe90d",
 			"key": "role_name",
 			"value": ""
 		},
 		{
-			"id": "8b584c8b-d1b4-4e3b-a594-c3612dea01ca",
+			"id": "c0ba2400-af6a-4cbc-9e7d-d0533c88c01a",
 			"key": "role_uti",
 			"value": ""
 		},
 		{
-			"id": "604d248d-8164-4fb7-bbda-4bbf39d1ec1f",
+			"id": "7b8e5eca-4e3f-47aa-b043-2954c4ed6b39",
 			"key": "user_email",
 			"value": ""
 		},
 		{
-			"id": "2e2d4194-1e38-44da-83aa-59a4d97ddc69",
+			"id": "3a1c3e19-0a62-4239-b655-ca7b8fb7041a",
 			"key": "user_identity",
 			"value": ""
 		},
 		{
-			"id": "350f7e44-c59a-4f5d-abd9-fa8e444dad7c",
+			"id": "106be033-a924-4bbd-8d29-002292f5ae61",
 			"key": "user_name",
 			"value": ""
 		},
 		{
-			"id": "ee9251be-2919-410e-8473-3b3ed742e47a",
+			"id": "fa74d3eb-ef04-4940-81b1-d3ff890d47dc",
 			"key": "user_password",
 			"value": ""
 		},
 		{
-			"id": "cd183303-6683-424c-815c-58e547f57d06",
+			"id": "8ffedc63-b5e4-4275-8491-59e3fb922919",
 			"key": "user_pnum",
 			"value": ""
 		},
 		{
-			"id": "f83b0813-6d5f-48a1-812e-6c5d797de188",
+			"id": "71485d46-b4bb-423e-bcd0-45b5b98d2258",
 			"key": "user_uti",
 			"value": ""
 		}
