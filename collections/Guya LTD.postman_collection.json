@@ -35,6 +35,11 @@
 										{
 											"key": "limit",
 											"value": "10"
+										},
+										{
+											"key": "uti",
+											"value": "eq:GE_1000",
+											"disabled": true
 										}
 									]
 								}
@@ -227,7 +232,7 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "http://127.0.0.1:60010/api/v1/roles/80",
+									"raw": "http://127.0.0.1:60010/api/v1/roles/82",
 									"protocol": "http",
 									"host": [
 										"127",
@@ -240,7 +245,7 @@
 										"api",
 										"v1",
 										"roles",
-										"80"
+										"82"
 									]
 								}
 							},
@@ -514,7 +519,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "http://127.0.0.1:60010/api/v1/users",
+									"raw": "http://127.0.0.1:60010/api/v1/users?limit=100",
 									"protocol": "http",
 									"host": [
 										"127",
@@ -527,6 +532,12 @@
 										"api",
 										"v1",
 										"users"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "100"
+										}
 									]
 								}
 							},
@@ -546,6 +557,22 @@
 										],
 										"type": "text/javascript"
 									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "29549382-d25e-4149-83da-a257b26ad49b",
+										"exec": [
+											"// User",
+											"pm.collectionVariables.set(\"user_fullname\", \"{{$randomFullName}}\")",
+											"pm.collectionVariables.set(\"user_identity\", \"{{$randomUserName}}\")",
+											"pm.collectionVariables.set(\"user_password\", \"{{$randomPassword}}\")",
+											"pm.collectionVariables.set(\"user_uti\", \"{{$randomNoun\")",
+											"pm.collectionVariables.set(\"user_email\", \"{{$randomEmail}}\")",
+											"pm.collectionVariables.set(\"user_pnum\", \"+251934343343\")"
+										],
+										"type": "text/javascript"
+									}
 								}
 							],
 							"request": {
@@ -553,7 +580,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"name\": \"{{user_name}}\",\n    \"identity\": \"{{user_identity}}\",\n    \"password\": \"{{user_password}}\",\n    \"uti\": \"bandwidth\",\n    \"email\": \"{{user_email}}\",\n    \"pnum\": \"{{user_pnum}}\"\n}",
+									"raw": "{\n    \"name\": \"{{user_fullname}}\",\n    \"identity\": \"{{user_identity}}\",\n    \"password\": \"{{user_password}}\",\n    \"uti\": \"{{user_uti}}\",\n    \"email\": \"{{user_email}}\",\n    \"pnum\": \"{{user_pnum}}\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -578,6 +605,31 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "users/",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:60010/api/v1/users/23",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60010",
+									"path": [
+										"api",
+										"v1",
+										"users",
+										"23"
+									]
+								}
+							},
+							"response": []
 						}
 					],
 					"event": [
@@ -587,13 +639,7 @@
 								"id": "a5e47f08-f809-4179-a7d2-8a50efd311c9",
 								"type": "text/javascript",
 								"exec": [
-									"// User",
-									"pm.collectionVariables.set(\"user_name\", \"{{$randomFullName}}\")",
-									"pm.collectionVariables.set(\"user_identity\", \"{{$randomUserName}}\")",
-									"pm.collectionVariables.set(\"user_password\", \"{{$randomPassword}}\")",
-									"pm.collectionVariables.set(\"user_uti\", \"{{$randomNoun\")",
-									"pm.collectionVariables.set(\"user_email\", \"{{$randomEmail}}\")",
-									"pm.collectionVariables.set(\"user_pnum\", \"+251934343343\")"
+									""
 								]
 							}
 						},
@@ -689,7 +735,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"identity\": \"postman@localhost.com\",\n    \"password\": \"postman123456789\"\n}",
+									"raw": "{\n    \"identity\": \"admin0@localhost.com\",\n    \"password\": \"admin\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -724,7 +770,7 @@
 									"bearer": [
 										{
 											"key": "token",
-											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdGF0dXNfY29kZSI6MjAwLCJzdGF0dXMiOiJPSyIsIm1lc3NhZ2UiOiJDcmVkZW50aWFsIG1hdGNoZWQifQ.C0NXhvJWuh8XXcrMS0P60CHjpZzeM4bWp3ivkm1Vb4k",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkYXRhIjp7ImNyZWF0ZWRfYXQiOiIyMDIwLTEyLTAxVDAxOjI0OjA5LjY5NTUyMSIsImNyZWRlbnRpYWwiOnsiYmxvY2tlZCI6ZmFsc2UsImlkIjo3LCJpZGVudGl0eSI6ImFkbWluMEBsb2NhbGhvc3QuY29tIiwibm90ZSI6bnVsbCwidXBkYXRlZF9hdCI6IjIwMjAtMTItMDFUMDE6MjQ6MDkuNjk4MTM2In0sImVtYWlsIjoiYWRtaW4wQGxvY2FsaG9zdC5jb20iLCJpZCI6MjgsIm5hbWUiOiJcdTEyNjBcdTEyMDhcdTEzMjEgXHUxMjYzXHUxMjA1XHUxMjI5IiwicG51bSI6bnVsbCwicm9sZSI6eyJjcmVhdGVkX2F0IjoiMjAyMC0xMi0wMVQwMToyMzowNy45MTcyMTYiLCJjcmVhdGVkX2J5IjoxLCJpZCI6MTE2LCJuYW1lIjoiRS1jb21tZXJjZSAtIEFkbWluIiwicGVybWlzc2lvbnMiOltdLCJ1cGRhdGVkX2F0IjoiMjAyMC0xMi0wMVQwMToyMzowNy45MTcyMjAiLCJ1cGRhdGVkX2J5IjpudWxsLCJ1dGkiOiJBRF8yMTEwIn0sInJvbGVfaWQiOjExNiwidXBkYXRlZF9hdCI6IjIwMjAtMTItMDFUMDE6MjQ6MDkuNjk1NTI1In0sIm1lc3NhZ2UiOiJDcmVkZW50aWFsIG1hdGNoZWQiLCJzdGF0dXMiOiJPSyIsInN0YXR1c19jb2RlIjoyMDB9.pCfN7SoRVuxRv8TkeWi_ttzX4iE2BXMjj4wcX_QZ1l8",
 											"type": "string"
 										}
 									]
@@ -820,6 +866,193 @@
 				}
 			],
 			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Branch",
+			"item": [
+				{
+					"name": "branches",
+					"item": [
+						{
+							"name": "branches",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:60001/api/v1/branches?limit=20",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60001",
+									"path": [
+										"api",
+										"v1",
+										"branches"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "20"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "branches",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "abd61cf1-367e-48c7-9d5c-0ee456c982ca",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"  pm.response.to.have.status(201);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "ca23a129-4ec8-49f7-a659-d484adb3a483",
+										"exec": [
+											"// Login",
+											"pm.sendRequest({",
+											"    url: pm.environment.get(\"API_GATEWAY_URL\") + \"/api/v1/sessions\",",
+											"    method: 'POST',",
+											"    header: { 'content-type': 'application/json' },",
+											"    body: {",
+											"        mode: 'raw',",
+											"        raw: JSON.stringify({",
+											"            identity: 'admin0@localhost.com',",
+											"            password: 'admin'",
+											"        })",
+											"    }",
+											"}, function (err, res) {",
+											"    // Set Authorization Header",
+											"    pm.variables.set('token', res.json().data.token);",
+											"});",
+											"",
+											"//var gps = [{{$randomLatitude}}, {{$randomLongitude}}]",
+											"var gps = [-15, -47];",
+											"var company = [\"shop\", \"xpress\"]",
+											"pm.collectionVariables.set(\"branch_name_en\", \"{{$randomBsNoun}}\")",
+											"pm.collectionVariables.set(\"branch_name_am\", \"{{$randomBsNoun}}\")",
+											"pm.collectionVariables.set(\"branch_woreda\", \"{{$randomNoun}}\")",
+											"pm.collectionVariables.set(\"branch_kebele\", \"{{$randomInt}}\")",
+											"pm.collectionVariables.set(\"branch_house_no\", \"{{$randomInt}}\")",
+											"pm.collectionVariables.set(\"branch_gps\", gps)",
+											"pm.collectionVariables.set(\"branch_manager_id\", \"{{$randomInt}}\")",
+											"pm.collectionVariables.set(\"branch_company\", \"shop\")"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"names\": {\n        \"en\": \"{{branch_name_en}}\",\n        \"am\": \"{{branch_name_am}}\"\n    },\n    \"location\": {\n        \"woreda\": \"{{branch_woreda}}\",\n        \"kebele\": \"{{branch_kebele}}\",\n        \"house_no\": \"{{branch_house_no}}\",\n        \"gps\": [{{branch_gps}}]\n    },\n    \"manager_id\": \"{{branch_manager_id}}\",\n    \"company\": \"{{branch_company}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:60001/api/v1/branches",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60001",
+									"path": [
+										"api",
+										"v1",
+										"branches"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "branches/",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:60001/api/v1/branches/5fc5db494c13a648eae6e3f2",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60001",
+									"path": [
+										"api",
+										"v1",
+										"branches",
+										"5fc5db494c13a648eae6e3f2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "branches/",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:60001/api/v1/branches/5fc5db494c13a648eae6e3f2",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60001",
+									"path": [
+										"api",
+										"v1",
+										"branches",
+										"5fc5db494c13a648eae6e3f2"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"event": [
@@ -846,18 +1079,93 @@
 	],
 	"variable": [
 		{
-			"id": "45c95275-ec2b-4e8c-9dee-3839e9424f9b",
+			"id": "7bcbe510-be00-4348-8679-1b43457a877b",
 			"key": "role_name",
 			"value": ""
 		},
 		{
-			"id": "092cf7ee-fd0f-44c1-abb3-574205fc13b8",
+			"id": "65dba2fc-eddd-41e6-a652-158221e11142",
 			"key": "role_uti",
 			"value": ""
 		},
 		{
-			"id": "f9a5f58d-77bb-4d78-912e-ea22e4c14f8a",
+			"id": "e48c3d8e-ef5f-45be-b4c7-29fbb25feddd",
 			"key": "roles_permissions",
+			"value": ""
+		},
+		{
+			"id": "60baddeb-7885-4ba8-880b-22a68a2f77ba",
+			"key": "user_email",
+			"value": ""
+		},
+		{
+			"id": "ad7c0656-1273-4f8d-bf9f-a0666976dc2d",
+			"key": "user_identity",
+			"value": ""
+		},
+		{
+			"id": "723db578-725f-4303-b433-4bd2d4e97374",
+			"key": "user_name",
+			"value": ""
+		},
+		{
+			"id": "76b2bfbc-e0ef-4df6-bb12-337f0e5b0633",
+			"key": "user_password",
+			"value": ""
+		},
+		{
+			"id": "c5a98794-eae4-4f86-a38a-18ed4f0c0426",
+			"key": "user_pnum",
+			"value": ""
+		},
+		{
+			"id": "7516f7ba-020a-4029-b1db-fa27b213f2e7",
+			"key": "user_uti",
+			"value": ""
+		},
+		{
+			"id": "180ac883-c1a0-4c5c-82f7-0d8e3de755a0",
+			"key": "user_fullname",
+			"value": ""
+		},
+		{
+			"id": "eb65f9cb-7acc-444a-bd6b-675ed5927191",
+			"key": "branch_name_am",
+			"value": ""
+		},
+		{
+			"id": "bcf34570-e0bc-44ed-8a96-e50b7f784851",
+			"key": "branch_name_en",
+			"value": ""
+		},
+		{
+			"id": "b7277abc-09a4-4712-908c-748e61a1e66f",
+			"key": "branch_woreda",
+			"value": ""
+		},
+		{
+			"id": "6faa0987-ea62-4a0d-8cd6-12d4330bb43c",
+			"key": "branch_gps",
+			"value": ""
+		},
+		{
+			"id": "b8a869cc-8293-4379-9291-cc1b1414d4fe",
+			"key": "branch_house_no",
+			"value": ""
+		},
+		{
+			"id": "2beb7dfe-f2fa-49a8-b0c1-5e0f39b07884",
+			"key": "branch_kebele",
+			"value": ""
+		},
+		{
+			"id": "377b98ab-6267-4241-ae1b-b6eb1f59c458",
+			"key": "branch_manager_id",
+			"value": ""
+		},
+		{
+			"id": "edc7014f-464b-43bf-8b0f-6428b378c125",
+			"key": "branch_company",
 			"value": ""
 		}
 	],
