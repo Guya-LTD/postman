@@ -5,7 +5,10 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "permission": "node permissions.js",
+    "role": "node roles.js",
+    "user": "node users.js",
+    "start": "npm run permission && npm run role && npm run user"
   },
   "author": "",
   "license": "ISC",

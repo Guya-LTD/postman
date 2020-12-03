@@ -20,29 +20,3 @@ newman.run({
     if (err) { throw err; }
     console.log('\`\/api\/v1\/permissions\` run complete!');
 });
-
-// 2. roles
-newman.run({
-    collection: collections,
-    reporters: ['cli', 'htmlextra', 'progress', 'emojitrain'],
-    reporter : { htmlextra : { export : './results/roles-post.html'} },
-    folder: "roles - post",
-    environment: environments,
-    iterationData: FAKER_DIR + '/' + 'roles.json'
-}, function (err) {
-    if (err) { throw err; }
-    console.log('\`\/api\/v1\/roles\` run complete!');
-});
-
-// 3. users
-newman.run({
-    collection: collections,
-    reporters: ['cli', 'htmlextra', 'progress', 'emojitrain'],
-    reporter : { htmlextra : { export : './results/users-post.html'} },
-    folder: "users - post",
-    environment: environments,
-    iterationData: FAKER_DIR + '/' + 'users.json'
-}, function (err) {
-    if (err) { throw err; }
-    console.log('\`\/api\/v1\/users\` run complete!');
-});
