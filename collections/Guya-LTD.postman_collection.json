@@ -47,7 +47,7 @@
 							"response": []
 						},
 						{
-							"name": "roles",
+							"name": "roles - post",
 							"event": [
 								{
 									"listen": "prerequest",
@@ -232,7 +232,7 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "http://127.0.0.1:60010/api/v1/roles/82",
+									"raw": "http://127.0.0.1:60010/api/v1/roles/1",
 									"protocol": "http",
 									"host": [
 										"127",
@@ -245,7 +245,7 @@
 										"api",
 										"v1",
 										"roles",
-										"82"
+										"1"
 									]
 								}
 							},
@@ -556,14 +556,14 @@
 							"response": []
 						},
 						{
-							"name": "users",
+							"name": "users - post",
 							"event": [
 								{
 									"listen": "test",
 									"script": {
 										"id": "7802e9af-592b-4660-96b3-697517905f36",
 										"exec": [
-											"pm.test(\"Status code is 200\", function () {",
+											"pm.test(\"Status code is 201\", function () {",
 											"  pm.response.to.have.status(201);",
 											"});"
 										],
@@ -1227,122 +1227,122 @@
 	],
 	"variable": [
 		{
-			"id": "6b28ebe3-66fb-47c9-af1a-f644863ace6f",
+			"id": "c356a45f-7705-43ed-9f5f-ee6f5f92f13e",
 			"key": "role_name",
 			"value": ""
 		},
 		{
-			"id": "a0ef672b-4ed0-4e59-98a2-393ae64a6302",
+			"id": "b9f1814d-63b9-4215-990a-1e4e0bdda0e0",
 			"key": "role_uti",
 			"value": ""
 		},
 		{
-			"id": "d3c0a11b-ec83-406e-9b00-f338e08ef756",
+			"id": "94ebbd8f-c374-4951-a78d-7a8b24207b84",
 			"key": "roles_permissions",
 			"value": ""
 		},
 		{
-			"id": "a752f6b1-2dd2-431c-b6c7-aab4c7a81445",
+			"id": "d093696b-f20f-41d8-80f0-0faa51086d82",
 			"key": "user_email",
 			"value": ""
 		},
 		{
-			"id": "cf83d7f4-aa6c-445d-9b28-60b8dcc89a53",
+			"id": "a199b4b5-05b8-41dd-84ec-dcce328ce3dd",
 			"key": "user_identity",
 			"value": ""
 		},
 		{
-			"id": "44d46d3e-77f8-4776-aabf-b9e5a601f41d",
+			"id": "916be75a-3e46-481c-9508-b7b2ed988ee9",
 			"key": "user_name",
 			"value": ""
 		},
 		{
-			"id": "e0262f2b-826a-4d63-b0e9-2504527fc42a",
+			"id": "ffbc0dc8-6957-4e92-abda-b73a6fe37368",
 			"key": "user_password",
 			"value": ""
 		},
 		{
-			"id": "eec12843-3cb8-41b4-8db7-06fce2f5e971",
+			"id": "0f10b429-84f4-4250-bd04-05e665a267d9",
 			"key": "user_pnum",
 			"value": ""
 		},
 		{
-			"id": "33943898-e7a1-4fbf-8d78-33606df64270",
+			"id": "03be9ce6-783c-48d3-9d04-7c63ca256699",
 			"key": "user_uti",
 			"value": ""
 		},
 		{
-			"id": "75ad491b-86b1-4db4-aefb-882463d69b98",
+			"id": "f90f986f-9ea6-4046-a2d6-144a95ce8cce",
 			"key": "user_fullname",
 			"value": ""
 		},
 		{
-			"id": "d0ddb477-89cd-4933-8d35-322b7203739f",
+			"id": "8b6becae-4018-417f-bd25-3c1107e134e3",
 			"key": "branch_name_am",
 			"value": ""
 		},
 		{
-			"id": "493090f8-dacd-4586-9679-2dd8efb1e43d",
+			"id": "c12febf4-33e6-464d-b211-48067d7ee857",
 			"key": "branch_name_en",
 			"value": ""
 		},
 		{
-			"id": "efa994a1-c077-47be-af91-4403cf90412b",
+			"id": "a3cb76f9-03fd-48da-9712-3c14a5fdd402",
 			"key": "branch_woreda",
 			"value": ""
 		},
 		{
-			"id": "924c50cd-877d-4423-8ba8-9afc4e3fc3d0",
+			"id": "bf59dffa-5666-402c-aaf6-cc5679a63d03",
 			"key": "branch_gps",
 			"value": ""
 		},
 		{
-			"id": "aa65bcc2-9a4c-4c67-bd18-0c27ab41818d",
+			"id": "ccf3c724-c2f5-4312-9a46-888041348ef9",
 			"key": "branch_house_no",
 			"value": ""
 		},
 		{
-			"id": "849ff44d-e285-454d-ba46-a7c744850cba",
+			"id": "12212945-cc28-494d-8d26-b2e897def974",
 			"key": "branch_kebele",
 			"value": ""
 		},
 		{
-			"id": "f3fe0a95-b061-4c3e-b609-c2a24605f291",
+			"id": "c344fc27-f890-4979-8feb-cd363b44d730",
 			"key": "branch_manager_id",
 			"value": ""
 		},
 		{
-			"id": "69f1d4ec-360e-49f1-bd6a-0ebf0aef2966",
+			"id": "48a3d0b4-9d8b-4b42-a4f0-358d878d52a1",
 			"key": "branch_company",
 			"value": ""
 		},
 		{
-			"id": "b89aaf18-db92-44ef-b8f8-6521341cfb3b",
+			"id": "76d5df71-2a11-4512-ac49-4ca5bb99d031",
 			"key": "permission_create",
 			"value": ""
 		},
 		{
-			"id": "60f05121-07cc-4a47-9655-ed485a2093d4",
+			"id": "b08d84dd-4612-4afb-a821-3abdc118a275",
 			"key": "permission_delete",
 			"value": ""
 		},
 		{
-			"id": "b41b8150-d2f7-490d-a683-9222b4e4980f",
+			"id": "014e8036-ad8b-4dc4-b5b9-eb40fb492423",
 			"key": "permission_key",
 			"value": ""
 		},
 		{
-			"id": "78bae98f-e7c0-496d-aab1-d31bb28ce4c1",
+			"id": "3cb69dba-a14b-4535-a4e8-22710a0c9b3e",
 			"key": "permission_name",
 			"value": ""
 		},
 		{
-			"id": "33f35e55-a93c-43ba-94a4-cd2fc0325a18",
+			"id": "d89f6ac9-3ae3-413b-8ffc-8834d102825c",
 			"key": "permission_read",
 			"value": ""
 		},
 		{
-			"id": "4604ccfa-b5f3-4b4b-ac08-112aa52049d6",
+			"id": "377c1a43-d5cd-4974-82f2-c7834681b5b6",
 			"key": "permission_update",
 			"value": ""
 		}
