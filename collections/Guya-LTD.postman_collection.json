@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "6910083f-9205-4a96-85ad-3c29902b5ca2",
-		"name": "Guya LTD",
+		"name": "Guya-LTD",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -83,7 +83,7 @@
 									"script": {
 										"id": "c3160f33-428e-4cff-969b-f88296e3ff54",
 										"exec": [
-											"pm.test(\"Status code is 200\", function () {",
+											"pm.test(\"Status code is 201\", function () {",
 											"  pm.response.to.have.status(201);",
 											"});"
 										],
@@ -311,7 +311,7 @@
 							"response": []
 						},
 						{
-							"name": "permissions",
+							"name": "permissions - post",
 							"event": [
 								{
 									"listen": "prerequest",
@@ -332,6 +332,18 @@
 											"    // Set Authorization Header",
 											"    pm.variables.set('token', res.json().data.token);",
 											"});*/"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "01bf7b1d-29cf-4988-9a32-fa38ec530fdb",
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {",
+											"  pm.response.to.have.status(201);",
+											"});"
 										],
 										"type": "text/javascript"
 									}
@@ -1053,6 +1065,142 @@
 				}
 			],
 			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Payment",
+			"item": [
+				{
+					"name": "payments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:60008/api/v1/payments",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "60008",
+							"path": [
+								"api",
+								"v1",
+								"payments"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Cart",
+			"item": [
+				{
+					"name": "carts",
+					"item": [
+						{
+							"name": "carts",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "5dad36b2-6baf-40a8-9a6f-af1dfd77e1ca",
+										"exec": [
+											"// Login",
+											"pm.sendRequest({",
+											"    url: pm.environment.get(\"API_GATEWAY_URL\") + \"/api/v1/sessions\",",
+											"    method: 'POST',",
+											"    header: { 'content-type': 'application/json' },",
+											"    body: {",
+											"        mode: 'raw',",
+											"        raw: JSON.stringify({",
+											"            identity: 'admin0@localhost.com',",
+											"            password: 'admin'",
+											"        })",
+											"    }",
+											"}, function (err, res) {",
+											"    // Set Authorization Header",
+											"    pm.variables.set('token', res.json().data.token);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:60002/api/v1/carts",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60002",
+									"path": [
+										"api",
+										"v1",
+										"carts"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "items",
+					"item": [
+						{
+							"name": "items",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:60002/api/v1/carts/items",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60002",
+									"path": [
+										"api",
+										"v1",
+										"carts",
+										"items"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"event": [
@@ -1079,93 +1227,123 @@
 	],
 	"variable": [
 		{
-			"id": "7bcbe510-be00-4348-8679-1b43457a877b",
+			"id": "6b28ebe3-66fb-47c9-af1a-f644863ace6f",
 			"key": "role_name",
 			"value": ""
 		},
 		{
-			"id": "65dba2fc-eddd-41e6-a652-158221e11142",
+			"id": "a0ef672b-4ed0-4e59-98a2-393ae64a6302",
 			"key": "role_uti",
 			"value": ""
 		},
 		{
-			"id": "e48c3d8e-ef5f-45be-b4c7-29fbb25feddd",
+			"id": "d3c0a11b-ec83-406e-9b00-f338e08ef756",
 			"key": "roles_permissions",
 			"value": ""
 		},
 		{
-			"id": "60baddeb-7885-4ba8-880b-22a68a2f77ba",
+			"id": "a752f6b1-2dd2-431c-b6c7-aab4c7a81445",
 			"key": "user_email",
 			"value": ""
 		},
 		{
-			"id": "ad7c0656-1273-4f8d-bf9f-a0666976dc2d",
+			"id": "cf83d7f4-aa6c-445d-9b28-60b8dcc89a53",
 			"key": "user_identity",
 			"value": ""
 		},
 		{
-			"id": "723db578-725f-4303-b433-4bd2d4e97374",
+			"id": "44d46d3e-77f8-4776-aabf-b9e5a601f41d",
 			"key": "user_name",
 			"value": ""
 		},
 		{
-			"id": "76b2bfbc-e0ef-4df6-bb12-337f0e5b0633",
+			"id": "e0262f2b-826a-4d63-b0e9-2504527fc42a",
 			"key": "user_password",
 			"value": ""
 		},
 		{
-			"id": "c5a98794-eae4-4f86-a38a-18ed4f0c0426",
+			"id": "eec12843-3cb8-41b4-8db7-06fce2f5e971",
 			"key": "user_pnum",
 			"value": ""
 		},
 		{
-			"id": "7516f7ba-020a-4029-b1db-fa27b213f2e7",
+			"id": "33943898-e7a1-4fbf-8d78-33606df64270",
 			"key": "user_uti",
 			"value": ""
 		},
 		{
-			"id": "180ac883-c1a0-4c5c-82f7-0d8e3de755a0",
+			"id": "75ad491b-86b1-4db4-aefb-882463d69b98",
 			"key": "user_fullname",
 			"value": ""
 		},
 		{
-			"id": "eb65f9cb-7acc-444a-bd6b-675ed5927191",
+			"id": "d0ddb477-89cd-4933-8d35-322b7203739f",
 			"key": "branch_name_am",
 			"value": ""
 		},
 		{
-			"id": "bcf34570-e0bc-44ed-8a96-e50b7f784851",
+			"id": "493090f8-dacd-4586-9679-2dd8efb1e43d",
 			"key": "branch_name_en",
 			"value": ""
 		},
 		{
-			"id": "b7277abc-09a4-4712-908c-748e61a1e66f",
+			"id": "efa994a1-c077-47be-af91-4403cf90412b",
 			"key": "branch_woreda",
 			"value": ""
 		},
 		{
-			"id": "6faa0987-ea62-4a0d-8cd6-12d4330bb43c",
+			"id": "924c50cd-877d-4423-8ba8-9afc4e3fc3d0",
 			"key": "branch_gps",
 			"value": ""
 		},
 		{
-			"id": "b8a869cc-8293-4379-9291-cc1b1414d4fe",
+			"id": "aa65bcc2-9a4c-4c67-bd18-0c27ab41818d",
 			"key": "branch_house_no",
 			"value": ""
 		},
 		{
-			"id": "2beb7dfe-f2fa-49a8-b0c1-5e0f39b07884",
+			"id": "849ff44d-e285-454d-ba46-a7c744850cba",
 			"key": "branch_kebele",
 			"value": ""
 		},
 		{
-			"id": "377b98ab-6267-4241-ae1b-b6eb1f59c458",
+			"id": "f3fe0a95-b061-4c3e-b609-c2a24605f291",
 			"key": "branch_manager_id",
 			"value": ""
 		},
 		{
-			"id": "edc7014f-464b-43bf-8b0f-6428b378c125",
+			"id": "69f1d4ec-360e-49f1-bd6a-0ebf0aef2966",
 			"key": "branch_company",
+			"value": ""
+		},
+		{
+			"id": "b89aaf18-db92-44ef-b8f8-6521341cfb3b",
+			"key": "permission_create",
+			"value": ""
+		},
+		{
+			"id": "60f05121-07cc-4a47-9655-ed485a2093d4",
+			"key": "permission_delete",
+			"value": ""
+		},
+		{
+			"id": "b41b8150-d2f7-490d-a683-9222b4e4980f",
+			"key": "permission_key",
+			"value": ""
+		},
+		{
+			"id": "78bae98f-e7c0-496d-aab1-d31bb28ce4c1",
+			"key": "permission_name",
+			"value": ""
+		},
+		{
+			"id": "33f35e55-a93c-43ba-94a4-cd2fc0325a18",
+			"key": "permission_read",
+			"value": ""
+		},
+		{
+			"id": "4604ccfa-b5f3-4b4b-ac08-112aa52049d6",
+			"key": "permission_update",
 			"value": ""
 		}
 	],
