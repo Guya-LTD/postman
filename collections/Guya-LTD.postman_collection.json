@@ -1287,6 +1287,234 @@
 				}
 			],
 			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Catalog",
+			"item": [
+				{
+					"name": "categories",
+					"item": [
+						{
+							"name": "categories",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:60003/api/v1/categories",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60003",
+									"path": [
+										"api",
+										"v1",
+										"categories"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "categories",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "ecc7be66-9518-4f83-93fc-a871e1ddd931",
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {",
+											"  pm.response.to.have.status(201);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "9b4e8d2b-03a1-444b-bb71-e34841cfbf31",
+										"exec": [
+											"// Login",
+											"pm.sendRequest({",
+											"    url: pm.environment.get(\"API_GATEWAY_URL\") + \"/api/v1/sessions\",",
+											"    method: 'POST',",
+											"    header: { 'content-type': 'application/json' },",
+											"    body: {",
+											"        mode: 'raw',",
+											"        raw: JSON.stringify({",
+											"            identity: 'admin0@localhost.com',",
+											"            password: 'admin'",
+											"        })",
+											"    }",
+											"}, function (err, res) {",
+											"    // Set Authorization Header",
+											"    pm.variables.set('token', res.json().data.token);",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"names\": {\n        \"en\": \"{{category_name_en}}\",\n        \"am\": \"{{category_name_am}}\"\n    },\n    \"image\": {\n        \"src\": \"{{image_src}}\",\n        \"priority\": \"{{image_priority}}\",\n        \"height\": \"{{image_height}}\",\n        \"width\": \"{{image_width}}\"   \n    },\n    \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:60003/api/v1/categories",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60003",
+									"path": [
+										"api",
+										"v1",
+										"categories"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Chipmunk",
+			"item": [
+				{
+					"name": "emails",
+					"item": [
+						{
+							"name": "welcome",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"to\": \"{{$randomExampleEmail}}\",\n    \"name\": \"{{$randomFirstName}}\",\n    \"username\": \"{{$randomUserName}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:60005/api/v1/emails/send/welcome",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60005",
+									"path": [
+										"api",
+										"v1",
+										"emails",
+										"send",
+										"welcome"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "invoice",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"to\": \"{{$randomExampleEmail}}\",\n    \"name\": \"{{$randomFirstName}}\",\n    \"due_date\": \"{{$randomDateFuture}}\",\n    \"invoice_id\": \"{{$randomInt}}\",\n    \"purchase_date\": \"{{$randomDateRecent}}\",\n    \"action_url\": \"{{$randomUrl}}\",\n    \"invoice_details\": [\n        {\n            \"description\": \"{{$randomLoremText}}\",\n            \"amount\": \"{{$randomPrice}}\",\n            \"quantity\": \"{{$randomInt}}\",\n            \"unit_price\": \"{{$randomInt}}\"\n        }\n    ],\n    \"subtotal\": \"{{$randomInt}}\",\n    \"discount\": \"{{$randomInt}}\",\n    \"tax_rate\": \"{{$randomInt}}\",\n    \"tax\": \"{{$randomInt}}\",\n    \"total\": \"{{$randomInt}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:60005/api/v1/emails/send/invoice",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60005",
+									"path": [
+										"api",
+										"v1",
+										"emails",
+										"send",
+										"invoice"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "password-reset",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"to\": \"{{$randomExampleEmail}}\",\n    \"name\": \"{{$randomFullName}}\",\n    \"browser_name\": \"{{$randomNoun}}\",\n    \"operating_system\": \"{{$randomNoun}}\",\n    \"reset_url\": \"{{$randomUrl}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:60005/api/v1/emails/send/password-reset",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60005",
+									"path": [
+										"api",
+										"v1",
+										"emails",
+										"send",
+										"password-reset"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"event": [
@@ -1313,132 +1541,132 @@
 	],
 	"variable": [
 		{
-			"id": "69d41da3-5080-472e-884e-db8220967f00",
+			"id": "c875fda6-ea32-43e1-9e1b-2eab496fcaf2",
 			"key": "role_name",
 			"value": ""
 		},
 		{
-			"id": "29cae4c6-4e61-436a-9d43-d08690ef44a0",
+			"id": "f037f478-a87c-403e-be59-c907fcc64891",
 			"key": "role_uti",
 			"value": ""
 		},
 		{
-			"id": "4a210605-2ae4-4fcc-93f0-7d35ca78f866",
+			"id": "c840a9ca-6824-492f-ae58-280cebc5b15d",
 			"key": "roles_permissions",
 			"value": ""
 		},
 		{
-			"id": "45c66a20-dfe9-41a8-9efc-db93f6608096",
+			"id": "39be1486-281d-4469-a33b-8d01055ff967",
 			"key": "user_email",
 			"value": ""
 		},
 		{
-			"id": "d0957987-6358-492b-b5f8-386edeef4d0e",
+			"id": "25f50cc5-889d-4be9-83a1-27f505700e4f",
 			"key": "user_identity",
 			"value": ""
 		},
 		{
-			"id": "f37fd9bd-d045-4858-a560-e5431c8256c5",
+			"id": "778b7c44-fcef-4565-bec0-249f6feb7d24",
 			"key": "user_name",
 			"value": ""
 		},
 		{
-			"id": "ed556984-8d81-4e4a-b005-b5f556cea4f7",
+			"id": "5149c655-e3ca-481d-a063-17fb36f669d0",
 			"key": "user_password",
 			"value": ""
 		},
 		{
-			"id": "4247a690-3696-4dab-9afa-7b1d69f3f63f",
+			"id": "54a5465b-4847-4e76-b8e8-aa2e4d3a3b8e",
 			"key": "user_pnum",
 			"value": ""
 		},
 		{
-			"id": "3222e856-02c9-4e3a-b139-c681a4ed363e",
+			"id": "d82f9c8d-a32f-4f21-99dc-ed8e1def55e8",
 			"key": "user_uti",
 			"value": ""
 		},
 		{
-			"id": "ddd6676d-044e-4eac-937f-604d21437d29",
+			"id": "3c562f9d-501c-471e-9a4f-ec9d37f11d5e",
 			"key": "user_fullname",
 			"value": ""
 		},
 		{
-			"id": "fce1703e-3880-4de5-b7f3-fc66c461496b",
+			"id": "f31478c8-e970-46a7-9252-9c0db036b27f",
 			"key": "branch_name_am",
 			"value": ""
 		},
 		{
-			"id": "a3c1539b-22d5-4529-9e1b-414e826ec7ab",
+			"id": "5936a4bb-c7d2-4d13-bcba-15821aa1733c",
 			"key": "branch_name_en",
 			"value": ""
 		},
 		{
-			"id": "2ecc7fcf-1c61-4952-b1fe-b772615c1532",
+			"id": "95b29d33-8a18-4949-a202-14557ff319c6",
 			"key": "branch_woreda",
 			"value": ""
 		},
 		{
-			"id": "718c89ea-b2d3-428a-8cb1-b9d354ac8f96",
+			"id": "4281c261-eec8-4362-8f18-12e18ab3a375",
 			"key": "branch_gps",
 			"value": ""
 		},
 		{
-			"id": "52903d07-38b6-4499-9332-0fabfe9e73c1",
+			"id": "9a30c470-7451-46d3-8464-39fb1075e171",
 			"key": "branch_house_no",
 			"value": ""
 		},
 		{
-			"id": "9c716557-9088-4e55-a39b-d2e1f20666fa",
+			"id": "f801a7bf-d3da-4346-a4e3-d21fc32affc9",
 			"key": "branch_kebele",
 			"value": ""
 		},
 		{
-			"id": "cb6a8267-4916-43a5-a731-bcf4af557932",
+			"id": "0a2bc7af-5dba-407f-977f-a4ce4d2c8bdb",
 			"key": "branch_manager_id",
 			"value": ""
 		},
 		{
-			"id": "66451e27-5150-4bc8-976c-b1b6cc8af728",
+			"id": "9046cc9b-8628-4dae-b7c5-86fdbbf7e57a",
 			"key": "branch_company",
 			"value": ""
 		},
 		{
-			"id": "fb017a44-99ce-4c48-8355-8578aa4b113d",
+			"id": "29de0592-187e-4d79-9247-ef81a4886c7d",
 			"key": "permission_create",
 			"value": ""
 		},
 		{
-			"id": "0d2777d7-cdad-4d53-8c5d-f779f8caf960",
+			"id": "812c6ce5-412a-4f0e-8ae0-c32a51fa1103",
 			"key": "permission_delete",
 			"value": ""
 		},
 		{
-			"id": "06644ee0-24ed-4987-8cea-e1144f029bfa",
+			"id": "085b5970-a081-403c-af59-c7bff2db2f19",
 			"key": "permission_key",
 			"value": ""
 		},
 		{
-			"id": "9ea742b7-5885-4380-8d80-1066e1cb851c",
+			"id": "fe77cdf9-0b78-43a6-9f4c-1969e6cb5fa0",
 			"key": "permission_name",
 			"value": ""
 		},
 		{
-			"id": "721c9d1e-8ac1-4e0c-9069-3c7c2855bbc7",
+			"id": "4936e294-9c89-4522-a5b4-d52e5deb3443",
 			"key": "permission_read",
 			"value": ""
 		},
 		{
-			"id": "163ca945-d51d-48e0-a049-7ffb61ecdced",
+			"id": "d02b1dcb-015b-4dc0-9cd7-1cd4ec271398",
 			"key": "permission_update",
 			"value": ""
 		},
 		{
-			"id": "96c78fc6-b67e-4d1a-8114-65bdaa252ca6",
+			"id": "b38eb1f9-5c0f-43e0-93f4-b8d64cb71218",
 			"key": "cart_item_product_id",
 			"value": ""
 		},
 		{
-			"id": "fa9c43f2-7a5e-4d6e-81e3-7e32650a9dcf",
+			"id": "e8a95f8a-2101-4a60-8d6f-9d00253238d6",
 			"key": "cart_item_quantity",
 			"value": ""
 		}
