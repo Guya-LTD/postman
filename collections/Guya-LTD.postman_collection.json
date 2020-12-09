@@ -1508,6 +1508,76 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "password-reset-help",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"to\": \"{{$randomExampleEmail}}\",\n    \"name\": \"{{$randomFullName}}\",\n    \"browser_name\": \"{{$randomNoun}}\",\n    \"operating_system\": \"{{$randomNoun}}\",\n    \"reset_url\": \"{{$randomUrl}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:60005/api/v1/emails/send/password-reset-help",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60005",
+									"path": [
+										"api",
+										"v1",
+										"emails",
+										"send",
+										"password-reset-help"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "receipt",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"to\": \"{{$randomExampleEmail}}\",\n    \"name\": \"{{$randomFirstName}}\",\n    \"receipt_id\": \"{{$randomInt}}\",\n    \"purchase_date\": \"{{$randomDateRecent}}\",\n    \"action_url\": \"{{$randomUrl}}\",\n    \"receipt_details\": [\n        {\n            \"description\": \"{{$randomLoremText}}\",\n            \"amount\": \"{{$randomPrice}}\",\n            \"quantity\": \"{{$randomInt}}\",\n            \"unit_price\": \"{{$randomInt}}\"\n        }\n    ],\n    \"subtotal\": \"{{$randomInt}}\",\n    \"discount\": \"{{$randomInt}}\",\n    \"tax_rate\": \"{{$randomInt}}\",\n    \"tax\": \"{{$randomInt}}\",\n    \"total\": \"{{$randomInt}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:60005/api/v1/emails/send/receipt",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60005",
+									"path": [
+										"api",
+										"v1",
+										"emails",
+										"send",
+										"receipt"
+									]
+								}
+							},
+							"response": []
 						}
 					],
 					"protocolProfileBehavior": {},
@@ -1541,132 +1611,132 @@
 	],
 	"variable": [
 		{
-			"id": "c875fda6-ea32-43e1-9e1b-2eab496fcaf2",
+			"id": "ec412fac-f2e0-4c97-91db-80fd5c93b622",
 			"key": "role_name",
 			"value": ""
 		},
 		{
-			"id": "f037f478-a87c-403e-be59-c907fcc64891",
+			"id": "6d1a533f-abb5-4e2e-8ab0-4e72c875dc57",
 			"key": "role_uti",
 			"value": ""
 		},
 		{
-			"id": "c840a9ca-6824-492f-ae58-280cebc5b15d",
+			"id": "49399223-6e2a-4ab4-bd73-8f400a09f4ce",
 			"key": "roles_permissions",
 			"value": ""
 		},
 		{
-			"id": "39be1486-281d-4469-a33b-8d01055ff967",
+			"id": "09d693cb-c9e4-4993-8b0e-6b5e0d932297",
 			"key": "user_email",
 			"value": ""
 		},
 		{
-			"id": "25f50cc5-889d-4be9-83a1-27f505700e4f",
+			"id": "df79cd36-97bb-4535-b672-bc113d152ab5",
 			"key": "user_identity",
 			"value": ""
 		},
 		{
-			"id": "778b7c44-fcef-4565-bec0-249f6feb7d24",
+			"id": "bd122f63-63bc-4379-85f7-8834837f1d55",
 			"key": "user_name",
 			"value": ""
 		},
 		{
-			"id": "5149c655-e3ca-481d-a063-17fb36f669d0",
+			"id": "bd4358fb-1e55-4d36-bedb-e7c1c8ed98b2",
 			"key": "user_password",
 			"value": ""
 		},
 		{
-			"id": "54a5465b-4847-4e76-b8e8-aa2e4d3a3b8e",
+			"id": "88a29cce-a434-4f1e-9b15-c52496d7ac40",
 			"key": "user_pnum",
 			"value": ""
 		},
 		{
-			"id": "d82f9c8d-a32f-4f21-99dc-ed8e1def55e8",
+			"id": "6e8ad3bb-bcbf-4db5-806c-09709f7a9bcd",
 			"key": "user_uti",
 			"value": ""
 		},
 		{
-			"id": "3c562f9d-501c-471e-9a4f-ec9d37f11d5e",
+			"id": "fc38e296-5e73-4675-8157-e9a7ecf29801",
 			"key": "user_fullname",
 			"value": ""
 		},
 		{
-			"id": "f31478c8-e970-46a7-9252-9c0db036b27f",
+			"id": "bf890f13-0335-43a6-8542-d80e7ecf7327",
 			"key": "branch_name_am",
 			"value": ""
 		},
 		{
-			"id": "5936a4bb-c7d2-4d13-bcba-15821aa1733c",
+			"id": "a11121c0-4a3a-4d08-b22b-f0a6d66132ff",
 			"key": "branch_name_en",
 			"value": ""
 		},
 		{
-			"id": "95b29d33-8a18-4949-a202-14557ff319c6",
+			"id": "1e7d4826-3d75-414c-8c4b-8b9d88042da9",
 			"key": "branch_woreda",
 			"value": ""
 		},
 		{
-			"id": "4281c261-eec8-4362-8f18-12e18ab3a375",
+			"id": "cdc879b8-2523-44a7-af77-1750bf10093a",
 			"key": "branch_gps",
 			"value": ""
 		},
 		{
-			"id": "9a30c470-7451-46d3-8464-39fb1075e171",
+			"id": "bfdaa69c-5127-44f9-bcb7-9f9884f213a9",
 			"key": "branch_house_no",
 			"value": ""
 		},
 		{
-			"id": "f801a7bf-d3da-4346-a4e3-d21fc32affc9",
+			"id": "174eea12-9b22-42fa-a2f6-8e61dec5eb5e",
 			"key": "branch_kebele",
 			"value": ""
 		},
 		{
-			"id": "0a2bc7af-5dba-407f-977f-a4ce4d2c8bdb",
+			"id": "b8e675fb-9bba-4015-a51c-91113f731fe0",
 			"key": "branch_manager_id",
 			"value": ""
 		},
 		{
-			"id": "9046cc9b-8628-4dae-b7c5-86fdbbf7e57a",
+			"id": "a5d761ef-71d0-48d1-9d7a-cab62c10ff84",
 			"key": "branch_company",
 			"value": ""
 		},
 		{
-			"id": "29de0592-187e-4d79-9247-ef81a4886c7d",
+			"id": "29167a46-c2ba-4994-ab4b-9e2d79b571c4",
 			"key": "permission_create",
 			"value": ""
 		},
 		{
-			"id": "812c6ce5-412a-4f0e-8ae0-c32a51fa1103",
+			"id": "938d5c52-a5b2-4a09-838e-f229507d175f",
 			"key": "permission_delete",
 			"value": ""
 		},
 		{
-			"id": "085b5970-a081-403c-af59-c7bff2db2f19",
+			"id": "025cb169-b565-465b-8ca8-05a103e850b6",
 			"key": "permission_key",
 			"value": ""
 		},
 		{
-			"id": "fe77cdf9-0b78-43a6-9f4c-1969e6cb5fa0",
+			"id": "27d5a87d-2861-4d4c-89b0-f4a9d42dbe3f",
 			"key": "permission_name",
 			"value": ""
 		},
 		{
-			"id": "4936e294-9c89-4522-a5b4-d52e5deb3443",
+			"id": "44139f13-a3b5-447e-b3fd-4094b986b729",
 			"key": "permission_read",
 			"value": ""
 		},
 		{
-			"id": "d02b1dcb-015b-4dc0-9cd7-1cd4ec271398",
+			"id": "6700a580-e17a-4257-8d06-89040bb5e775",
 			"key": "permission_update",
 			"value": ""
 		},
 		{
-			"id": "b38eb1f9-5c0f-43e0-93f4-b8d64cb71218",
+			"id": "714181ee-5bb9-45f4-825d-515665ecd215",
 			"key": "cart_item_product_id",
 			"value": ""
 		},
 		{
-			"id": "e8a95f8a-2101-4a60-8d6f-9d00253238d6",
+			"id": "7f810a99-ca83-4292-a829-a01ec426e653",
 			"key": "cart_item_quantity",
 			"value": ""
 		}
