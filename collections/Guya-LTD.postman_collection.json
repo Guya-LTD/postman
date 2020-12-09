@@ -1585,6 +1585,494 @@
 				}
 			],
 			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Payment",
+			"item": [
+				{
+					"name": "payments",
+					"item": [
+						{
+							"name": "payments",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "127.0.0.1:60008/api/v1/payments",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60008",
+									"path": [
+										"api",
+										"v1",
+										"payments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "payments",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "e18ed1c7-cc17-4f46-aa53-c30667aca841",
+										"exec": [
+											"// Login",
+											"pm.sendRequest({",
+											"    url: pm.environment.get(\"API_GATEWAY_URL\") + \"/api/v1/sessions\",",
+											"    method: 'POST',",
+											"    header: { 'content-type': 'application/json' },",
+											"    body: {",
+											"        mode: 'raw',",
+											"        raw: JSON.stringify({",
+											"            identity: 'admin0@localhost.com',",
+											"            password: 'admin'",
+											"        })",
+											"    }",
+											"}, function (err, res) {",
+											"    // Set Authorization Header",
+											"    pm.variables.set('token', res.json().data.token);",
+											"});",
+											"",
+											"pm.collectionVariables.set(\"payment_invoice_number\", \"{{$randomInt}}\")",
+											"pm.collectionVariables.set(\"payment_transaction_id\", \"{{$randomInt}}\")",
+											"pm.collectionVariables.set(\"payment_transaction_date\", \"{{$randomDateRecent}}\")",
+											"pm.collectionVariables.set(\"payment_transaction_medium\", \"{{$randomNoun}}\")"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "c67a40ec-700c-4a2a-888b-a4f68ebc28ac",
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {",
+											"  pm.response.to.have.status(201);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"invoice_number\": \"{{payment_invoice_number}}\",\n    \"transaction_id\": \"{{payment_transaction_id}}\",\n    \"transaction_date\": \"{{payment_transaction_date}}\",\n    \"transaction_medium\": \"{{payment_transaction_medium}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "127.0.0.1:60008/api/v1/payments",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60008",
+									"path": [
+										"api",
+										"v1",
+										"payments"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "payments/",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "127.0.0.1:60008/api/v1/payments/5fd02b1b8afcffc9906e9b92",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60008",
+									"path": [
+										"api",
+										"v1",
+										"payments",
+										"5fd02b1b8afcffc9906e9b92"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "payments/",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "d3e6d8a0-a771-4588-913c-d75380ae5c0c",
+										"exec": [
+											"// Login",
+											"pm.sendRequest({",
+											"    url: pm.environment.get(\"API_GATEWAY_URL\") + \"/api/v1/sessions\",",
+											"    method: 'POST',",
+											"    header: { 'content-type': 'application/json' },",
+											"    body: {",
+											"        mode: 'raw',",
+											"        raw: JSON.stringify({",
+											"            identity: 'admin0@localhost.com',",
+											"            password: 'admin'",
+											"        })",
+											"    }",
+											"}, function (err, res) {",
+											"    // Set Authorization Header",
+											"    pm.variables.set('token', res.json().data.token);",
+											"});",
+											"",
+											"pm.collectionVariables.set(\"payment_invoice_number\", \"{{$randomInt}}\")",
+											"pm.collectionVariables.set(\"payment_transaction_id\", \"{{$randomInt}}\")",
+											"pm.collectionVariables.set(\"payment_transaction_date\", \"{{$randomDateRecent}}\")",
+											"pm.collectionVariables.set(\"payment_transaction_medium\", \"{{$randomNoun}}\")"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"invoice_number\": \"{{payment_invoice_number}}\",\n    \"transaction_id\": \"{{payment_transaction_id}}\",\n    \"transaction_date\": \"{{payment_transaction_date}}\",\n    \"transaction_medium\": \"{{payment_transaction_medium}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "127.0.0.1:60008/api/v1/payments/5fd02b1b8afcffc9906e9b92",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60008",
+									"path": [
+										"api",
+										"v1",
+										"payments",
+										"5fd02b1b8afcffc9906e9b92"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "payments/",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "127.0.0.1:60008/api/v1/payments/5fd02b1b8afcffc9906e9b92",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60008",
+									"path": [
+										"api",
+										"v1",
+										"payments",
+										"5fd02b1b8afcffc9906e9b92"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "transactions",
+					"item": [
+						{
+							"name": "transactions",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "127.0.0.1:60008/api/v1/transactions",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60008",
+									"path": [
+										"api",
+										"v1",
+										"transactions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "transactions",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "d8b13d41-be31-47d0-8dc7-a30ac1b86867",
+										"exec": [
+											"// Login",
+											"pm.sendRequest({",
+											"    url: pm.environment.get(\"API_GATEWAY_URL\") + \"/api/v1/sessions\",",
+											"    method: 'POST',",
+											"    header: { 'content-type': 'application/json' },",
+											"    body: {",
+											"        mode: 'raw',",
+											"        raw: JSON.stringify({",
+											"            identity: 'admin0@localhost.com',",
+											"            password: 'admin'",
+											"        })",
+											"    }",
+											"}, function (err, res) {",
+											"    // Set Authorization Header",
+											"    pm.variables.set('token', res.json().data.token);",
+											"});",
+											"",
+											"pm.collectionVariables.set(\"transaction_invoice_number\", \"{{$randomInt}}\")",
+											"pm.collectionVariables.set(\"transaction_transaction_id\", \"{{$randomInt}}\")",
+											"pm.collectionVariables.set(\"transaction_transaction_date\", \"{{$randomDateRecent}}\")",
+											"pm.collectionVariables.set(\"transaction_transaction_medium\", \"{{$randomNoun}}\")",
+											"pm.collectionVariables.set(\"transaction_amount\", \"{{$randomInt}}\")",
+											"pm.collectionVariables.set(\"transaction_flag\", \"{{$randomLoremLines}}\")"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "b95dd409-6681-4a07-adf7-92aae1351e20",
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {",
+											"  pm.response.to.have.status(201);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"transaction_id\": \"{{transaction_transaction_id}}\",\n    \"transaction_date\": \"{{transaction_transaction_date}}\",\n    \"transaction_medium\": \"{{transaction_transaction_medium}}\",\n    \"amount\": \"{{transaction_amount}}\",\n    \"flag\": \"{{transaction_flag}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "127.0.0.1:60008/api/v1/transactions",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60008",
+									"path": [
+										"api",
+										"v1",
+										"transactions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "transactions/",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "127.0.0.1:60008/api/v1/transactions/5fd03f66cd7149c68d07e07f",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60008",
+									"path": [
+										"api",
+										"v1",
+										"transactions",
+										"5fd03f66cd7149c68d07e07f"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "transactions/",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "dd56ed20-8019-4680-aeea-c851aff5c20c",
+										"exec": [
+											"// Login",
+											"pm.sendRequest({",
+											"    url: pm.environment.get(\"API_GATEWAY_URL\") + \"/api/v1/sessions\",",
+											"    method: 'POST',",
+											"    header: { 'content-type': 'application/json' },",
+											"    body: {",
+											"        mode: 'raw',",
+											"        raw: JSON.stringify({",
+											"            identity: 'admin0@localhost.com',",
+											"            password: 'admin'",
+											"        })",
+											"    }",
+											"}, function (err, res) {",
+											"    // Set Authorization Header",
+											"    pm.variables.set('token', res.json().data.token);",
+											"});",
+											"",
+											"pm.collectionVariables.set(\"transaction_invoice_number\", \"{{$randomInt}}\")",
+											"pm.collectionVariables.set(\"transaction_transaction_id\", \"{{$randomInt}}\")",
+											"pm.collectionVariables.set(\"transaction_transaction_date\", \"{{$randomDateRecent}}\")",
+											"pm.collectionVariables.set(\"transaction_transaction_medium\", \"{{$randomNoun}}\")",
+											"pm.collectionVariables.set(\"transaction_amount\", \"{{$randomInt}}\")",
+											"pm.collectionVariables.set(\"transaction_flag\", \"{{$randomLoremLines}}\")"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"transaction_id\": \"{{transaction_transaction_id}}\",\n    \"transaction_date\": \"{{transaction_transaction_date}}\",\n    \"transaction_medium\": \"{{transaction_transaction_medium}}\",\n    \"amount\": \"{{transaction_amount}}\",\n    \"flag\": \"{{transaction_flag}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "127.0.0.1:60008/api/v1/transactions/5fd03f66cd7149c68d07e07f",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60008",
+									"path": [
+										"api",
+										"v1",
+										"transactions",
+										"5fd03f66cd7149c68d07e07f"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "transactions/",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "127.0.0.1:60008/api/v1/transactions/5fd03f66cd7149c68d07e07f",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60008",
+									"path": [
+										"api",
+										"v1",
+										"transactions",
+										"5fd03f66cd7149c68d07e07f"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"event": [
@@ -1611,133 +2099,183 @@
 	],
 	"variable": [
 		{
-			"id": "ec412fac-f2e0-4c97-91db-80fd5c93b622",
+			"id": "8595a02f-8b5d-4d7f-ae79-09fa8b79c47e",
 			"key": "role_name",
 			"value": ""
 		},
 		{
-			"id": "6d1a533f-abb5-4e2e-8ab0-4e72c875dc57",
+			"id": "4a197e74-2c2e-4ecf-a478-3ebce0671299",
 			"key": "role_uti",
 			"value": ""
 		},
 		{
-			"id": "49399223-6e2a-4ab4-bd73-8f400a09f4ce",
+			"id": "ff192f33-0577-4650-a619-ab3930d7b969",
 			"key": "roles_permissions",
 			"value": ""
 		},
 		{
-			"id": "09d693cb-c9e4-4993-8b0e-6b5e0d932297",
+			"id": "735e0dd1-3256-4da2-8160-3e74a2f59856",
 			"key": "user_email",
 			"value": ""
 		},
 		{
-			"id": "df79cd36-97bb-4535-b672-bc113d152ab5",
+			"id": "aa99e0df-67be-4dfd-a474-98ade18ec2a9",
 			"key": "user_identity",
 			"value": ""
 		},
 		{
-			"id": "bd122f63-63bc-4379-85f7-8834837f1d55",
+			"id": "fafa5afb-82f1-4a8a-9259-2d8e625006f7",
 			"key": "user_name",
 			"value": ""
 		},
 		{
-			"id": "bd4358fb-1e55-4d36-bedb-e7c1c8ed98b2",
+			"id": "cb62510e-2ad2-4dcc-914b-f9a40f3e45b1",
 			"key": "user_password",
 			"value": ""
 		},
 		{
-			"id": "88a29cce-a434-4f1e-9b15-c52496d7ac40",
+			"id": "f29e85af-2a05-443b-b179-361a6e177a9c",
 			"key": "user_pnum",
 			"value": ""
 		},
 		{
-			"id": "6e8ad3bb-bcbf-4db5-806c-09709f7a9bcd",
+			"id": "c8dfff55-095d-4f8a-8a1a-698ff8a474d2",
 			"key": "user_uti",
 			"value": ""
 		},
 		{
-			"id": "fc38e296-5e73-4675-8157-e9a7ecf29801",
+			"id": "c967ba71-8a7c-496a-8c0f-4b53cb93ba19",
 			"key": "user_fullname",
 			"value": ""
 		},
 		{
-			"id": "bf890f13-0335-43a6-8542-d80e7ecf7327",
+			"id": "b0947e3f-e56a-4699-b2b6-0134d310c177",
 			"key": "branch_name_am",
 			"value": ""
 		},
 		{
-			"id": "a11121c0-4a3a-4d08-b22b-f0a6d66132ff",
+			"id": "dd751b65-753a-4a00-a666-50b80125c1ef",
 			"key": "branch_name_en",
 			"value": ""
 		},
 		{
-			"id": "1e7d4826-3d75-414c-8c4b-8b9d88042da9",
+			"id": "d5462899-14f1-45b0-bd06-8660131d7506",
 			"key": "branch_woreda",
 			"value": ""
 		},
 		{
-			"id": "cdc879b8-2523-44a7-af77-1750bf10093a",
+			"id": "08a14d85-fa8f-479c-9afa-953f880559a6",
 			"key": "branch_gps",
 			"value": ""
 		},
 		{
-			"id": "bfdaa69c-5127-44f9-bcb7-9f9884f213a9",
+			"id": "a3cde1b3-0a8c-4fef-ba52-76cf2d3df401",
 			"key": "branch_house_no",
 			"value": ""
 		},
 		{
-			"id": "174eea12-9b22-42fa-a2f6-8e61dec5eb5e",
+			"id": "d889535d-1922-4108-b1e8-4bdebbe16a85",
 			"key": "branch_kebele",
 			"value": ""
 		},
 		{
-			"id": "b8e675fb-9bba-4015-a51c-91113f731fe0",
+			"id": "49a5569c-deb1-404a-bd3b-2017a9ec8cb6",
 			"key": "branch_manager_id",
 			"value": ""
 		},
 		{
-			"id": "a5d761ef-71d0-48d1-9d7a-cab62c10ff84",
+			"id": "e6dc14dc-e7f8-4c7e-bc57-8872dd0ba225",
 			"key": "branch_company",
 			"value": ""
 		},
 		{
-			"id": "29167a46-c2ba-4994-ab4b-9e2d79b571c4",
+			"id": "e7efc3be-b08d-485c-b0d8-e678d028b043",
 			"key": "permission_create",
 			"value": ""
 		},
 		{
-			"id": "938d5c52-a5b2-4a09-838e-f229507d175f",
+			"id": "0db7b9b3-c613-4479-b4bf-fbbeea54680d",
 			"key": "permission_delete",
 			"value": ""
 		},
 		{
-			"id": "025cb169-b565-465b-8ca8-05a103e850b6",
+			"id": "6b376d6e-d0a2-4b51-98c1-a67e939375e5",
 			"key": "permission_key",
 			"value": ""
 		},
 		{
-			"id": "27d5a87d-2861-4d4c-89b0-f4a9d42dbe3f",
+			"id": "5014fd28-5af3-47ae-9db5-754979d55d79",
 			"key": "permission_name",
 			"value": ""
 		},
 		{
-			"id": "44139f13-a3b5-447e-b3fd-4094b986b729",
+			"id": "a3e8cbf1-a431-495c-8c21-59acdba66733",
 			"key": "permission_read",
 			"value": ""
 		},
 		{
-			"id": "6700a580-e17a-4257-8d06-89040bb5e775",
+			"id": "9a8bd75a-ef71-482a-b547-ddc510dc3516",
 			"key": "permission_update",
 			"value": ""
 		},
 		{
-			"id": "714181ee-5bb9-45f4-825d-515665ecd215",
+			"id": "a40a5701-d380-4bbf-bdbe-237aac5ebed5",
 			"key": "cart_item_product_id",
 			"value": ""
 		},
 		{
-			"id": "7f810a99-ca83-4292-a829-a01ec426e653",
+			"id": "00087fb8-4830-4741-b3b6-fd650f536e69",
 			"key": "cart_item_quantity",
+			"value": ""
+		},
+		{
+			"id": "bd9dee97-b046-4d7f-bb63-6ed46c01d218",
+			"key": "payment_invoice_number",
+			"value": ""
+		},
+		{
+			"id": "75a1d696-b8f3-487d-9653-174e105100f7",
+			"key": "payment_transaction_date",
+			"value": ""
+		},
+		{
+			"id": "1b9c6216-a468-45b9-84a2-9745e7539052",
+			"key": "payment_transaction_id",
+			"value": ""
+		},
+		{
+			"id": "24b074e2-8913-4bd4-925e-c06840b8364b",
+			"key": "payment_transaction_medium",
+			"value": ""
+		},
+		{
+			"id": "c733cb67-b08e-41d4-ab65-c368a53396c5",
+			"key": "transaction_amount",
+			"value": ""
+		},
+		{
+			"id": "30e2fb3d-a9d5-4cbb-97a2-17b42ded7f7b",
+			"key": "transaction_flag",
+			"value": ""
+		},
+		{
+			"id": "26df8e8f-2d15-418e-83ec-181eb6f8540b",
+			"key": "transaction_invoice_number",
+			"value": ""
+		},
+		{
+			"id": "a7f664a9-1a57-4d57-8f7f-6c1bfab5e8df",
+			"key": "transaction_transaction_date",
+			"value": ""
+		},
+		{
+			"id": "74669f88-9112-4312-bc42-cba3cb925d5b",
+			"key": "transaction_transaction_id",
+			"value": ""
+		},
+		{
+			"id": "75242fa3-9ad5-469b-84e1-4521769a6c6d",
+			"key": "transaction_transaction_medium",
 			"value": ""
 		}
 	],
