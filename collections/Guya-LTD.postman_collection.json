@@ -1289,116 +1289,6 @@
 			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "Catalog",
-			"item": [
-				{
-					"name": "categories",
-					"item": [
-						{
-							"name": "categories",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://127.0.0.1:60003/api/v1/categories",
-									"protocol": "http",
-									"host": [
-										"127",
-										"0",
-										"0",
-										"1"
-									],
-									"port": "60003",
-									"path": [
-										"api",
-										"v1",
-										"categories"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "categories",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "ecc7be66-9518-4f83-93fc-a871e1ddd931",
-										"exec": [
-											"pm.test(\"Status code is 201\", function () {",
-											"  pm.response.to.have.status(201);",
-											"});"
-										],
-										"type": "text/javascript"
-									}
-								},
-								{
-									"listen": "prerequest",
-									"script": {
-										"id": "9b4e8d2b-03a1-444b-bb71-e34841cfbf31",
-										"exec": [
-											"// Login",
-											"pm.sendRequest({",
-											"    url: pm.environment.get(\"API_GATEWAY_URL\") + \"/api/v1/sessions\",",
-											"    method: 'POST',",
-											"    header: { 'content-type': 'application/json' },",
-											"    body: {",
-											"        mode: 'raw',",
-											"        raw: JSON.stringify({",
-											"            identity: 'admin0@localhost.com',",
-											"            password: 'admin'",
-											"        })",
-											"    }",
-											"}, function (err, res) {",
-											"    // Set Authorization Header",
-											"    pm.variables.set('token', res.json().data.token);",
-											"});",
-											""
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"names\": {\n        \"en\": \"{{category_name_en}}\",\n        \"am\": \"{{category_name_am}}\"\n    },\n    \"image\": {\n        \"src\": \"{{image_src}}\",\n        \"priority\": \"{{image_priority}}\",\n        \"height\": \"{{image_height}}\",\n        \"width\": \"{{image_width}}\"   \n    },\n    \n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://127.0.0.1:60003/api/v1/categories",
-									"protocol": "http",
-									"host": [
-										"127",
-										"0",
-										"0",
-										"1"
-									],
-									"port": "60003",
-									"path": [
-										"api",
-										"v1",
-										"categories"
-									]
-								}
-							},
-							"response": []
-						}
-					],
-					"protocolProfileBehavior": {},
-					"_postman_isSubFolder": true
-				}
-			],
-			"protocolProfileBehavior": {}
-		},
-		{
 			"name": "Chipmunk",
 			"item": [
 				{
@@ -1639,11 +1529,18 @@
 											"    // Set Authorization Header",
 											"    pm.variables.set('token', res.json().data.token);",
 											"});",
-											"",
+											"/*",
 											"pm.collectionVariables.set(\"payment_invoice_number\", \"{{$randomInt}}\")",
 											"pm.collectionVariables.set(\"payment_transaction_id\", \"{{$randomInt}}\")",
 											"pm.collectionVariables.set(\"payment_transaction_date\", \"{{$randomDateRecent}}\")",
-											"pm.collectionVariables.set(\"payment_transaction_medium\", \"{{$randomNoun}}\")"
+											"pm.collectionVariables.set(\"payment_transaction_medium\", \"{{$randomNoun}}\")",
+											"*/",
+											"",
+											"pm.collectionVariables.set(\"payment_invoice_number\", \"10\")",
+											"pm.collectionVariables.set(\"payment_transaction_id\", \"20\")",
+											"pm.collectionVariables.set(\"payment_transaction_date\", \"10-02-2020\")",
+											"pm.collectionVariables.set(\"payment_transaction_medium\", \"mbirr\")",
+											""
 										],
 										"type": "text/javascript"
 									}
@@ -1806,7 +1703,7 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "127.0.0.1:60008/api/v1/payments/5fd02b1b8afcffc9906e9b92",
+									"raw": "127.0.0.1:60008/api/v1/payments/5fd1e1e66c96b660884c06fd",
 									"host": [
 										"127",
 										"0",
@@ -1818,7 +1715,7 @@
 										"api",
 										"v1",
 										"payments",
-										"5fd02b1b8afcffc9906e9b92"
+										"5fd1e1e66c96b660884c06fd"
 									]
 								}
 							},
@@ -1879,12 +1776,19 @@
 											"    pm.variables.set('token', res.json().data.token);",
 											"});",
 											"",
-											"pm.collectionVariables.set(\"transaction_invoice_number\", \"{{$randomInt}}\")",
 											"pm.collectionVariables.set(\"transaction_transaction_id\", \"{{$randomInt}}\")",
 											"pm.collectionVariables.set(\"transaction_transaction_date\", \"{{$randomDateRecent}}\")",
 											"pm.collectionVariables.set(\"transaction_transaction_medium\", \"{{$randomNoun}}\")",
 											"pm.collectionVariables.set(\"transaction_amount\", \"{{$randomInt}}\")",
-											"pm.collectionVariables.set(\"transaction_flag\", \"{{$randomLoremLines}}\")"
+											"pm.collectionVariables.set(\"transaction_flag\", \"{{$randomLoremLines}}\")",
+											"",
+											"/*",
+											"pm.collectionVariables.set(\"transaction_transaction_id\", \"20\")",
+											"pm.collectionVariables.set(\"transaction_transaction_date\", \"10-02-2020\")",
+											"pm.collectionVariables.set(\"transaction_transaction_medium\", \"mbirr\")",
+											"pm.collectionVariables.set(\"transaction_amount\", \"{{$randomInt}}\")",
+											"pm.collectionVariables.set(\"transaction_flag\", \"{{$randomNoun}}\")",
+											"*/"
 										],
 										"type": "text/javascript"
 									}
@@ -1917,7 +1821,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"transaction_id\": \"{{transaction_transaction_id}}\",\n    \"transaction_date\": \"{{transaction_transaction_date}}\",\n    \"transaction_medium\": \"{{transaction_transaction_medium}}\",\n    \"amount\": \"{{transaction_amount}}\",\n    \"flag\": \"{{transaction_flag}}\"\n}",
+									"raw": "{\n    \"transaction_id\": \"{{transaction_transaction_id}}\",\n    \"transaction_date\": \"{{transaction_transaction_date}}\",\n    \"transaction_medium\": \"{{transaction_transaction_medium}}\",\n    \"amount\": \"{{transaction_amount}}\",\n    \"flag\": \"{{transaction_flag}}\"\n}\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -1948,7 +1852,7 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "127.0.0.1:60008/api/v1/transactions/5fd03f66cd7149c68d07e07f",
+									"raw": "127.0.0.1:60008/api/v1/transactions/5fd1ed0ed13fdf7cb61ca98c",
 									"host": [
 										"127",
 										"0",
@@ -1960,7 +1864,7 @@
 										"api",
 										"v1",
 										"transactions",
-										"5fd03f66cd7149c68d07e07f"
+										"5fd1ed0ed13fdf7cb61ca98c"
 									]
 								}
 							},
@@ -2073,6 +1977,619 @@
 				}
 			],
 			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Catalog",
+			"item": [
+				{
+					"name": "categories",
+					"item": [
+						{
+							"name": "categories",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:60003/api/v1/categories",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60003",
+									"path": [
+										"api",
+										"v1",
+										"categories"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "categories",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "ecc7be66-9518-4f83-93fc-a871e1ddd931",
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {",
+											"  pm.response.to.have.status(201);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "9b4e8d2b-03a1-444b-bb71-e34841cfbf31",
+										"exec": [
+											"// Login",
+											"pm.sendRequest({",
+											"    url: pm.environment.get(\"API_GATEWAY_URL\") + \"/api/v1/sessions\",",
+											"    method: 'POST',",
+											"    header: { 'content-type': 'application/json' },",
+											"    body: {",
+											"        mode: 'raw',",
+											"        raw: JSON.stringify({",
+											"            identity: 'admin0@localhost.com',",
+											"            password: 'admin'",
+											"        })",
+											"    }",
+											"}, function (err, res) {",
+											"    // Set Authorization Header",
+											"    pm.variables.set('token', res.json().data.token);",
+											"});",
+											"",
+											"pm.collectionVariables.set(\"category_name_en\", \"{{$randomNoun}}\")",
+											"pm.collectionVariables.set(\"category_name_am\", \"{{$randomNoun}}\")"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"names\": {\n        \"en\": \"{{category_name_en}}\",\n        \"am\": \"{{category_name_am}}\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:60003/api/v1/categories",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60003",
+									"path": [
+										"api",
+										"v1",
+										"categories"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "categories/",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:60003/api/v1/categories/5fd3162e18f441addb831662",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60003",
+									"path": [
+										"api",
+										"v1",
+										"categories",
+										"5fd3162e18f441addb831662"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "categories/",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "d2611bf3-370a-450f-ae04-23179d3724ed",
+										"exec": [
+											"// Login",
+											"pm.sendRequest({",
+											"    url: pm.environment.get(\"API_GATEWAY_URL\") + \"/api/v1/sessions\",",
+											"    method: 'POST',",
+											"    header: { 'content-type': 'application/json' },",
+											"    body: {",
+											"        mode: 'raw',",
+											"        raw: JSON.stringify({",
+											"            identity: 'admin0@localhost.com',",
+											"            password: 'admin'",
+											"        })",
+											"    }",
+											"}, function (err, res) {",
+											"    // Set Authorization Header",
+											"    pm.variables.set('token', res.json().data.token);",
+											"});",
+											"",
+											"pm.collectionVariables.set(\"category_name_en\", \"{{$randomNoun}}\")",
+											"pm.collectionVariables.set(\"category_name_am\", \"{{$randomNoun}}\")"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"names\": {\n        \"en\": \"{{category_name_en}}\",\n        \"am\": \"{{category_name_am}}\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:60003/api/v1/categories/5fd3162e18f441addb831667",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60003",
+									"path": [
+										"api",
+										"v1",
+										"categories",
+										"5fd3162e18f441addb831667"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "categories",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:60003/api/v1/categories/5fd3162e18f441addb831667",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60003",
+									"path": [
+										"api",
+										"v1",
+										"categories",
+										"5fd3162e18f441addb831667"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "variant-types",
+					"item": [
+						{
+							"name": "variant-types",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:60003/api/v1/variant-types",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60003",
+									"path": [
+										"api",
+										"v1",
+										"variant-types"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "variant-types",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "a48010ed-9025-4c52-88cf-99d862466c54",
+										"exec": [
+											"// Login",
+											"pm.sendRequest({",
+											"    url: pm.environment.get(\"API_GATEWAY_URL\") + \"/api/v1/sessions\",",
+											"    method: 'POST',",
+											"    header: { 'content-type': 'application/json' },",
+											"    body: {",
+											"        mode: 'raw',",
+											"        raw: JSON.stringify({",
+											"            identity: 'admin0@localhost.com',",
+											"            password: 'admin'",
+											"        })",
+											"    }",
+											"}, function (err, res) {",
+											"    // Set Authorization Header",
+											"    pm.variables.set('token', res.json().data.token);",
+											"});",
+											"",
+											"pm.collectionVariables.set(\"variant_type_name_en\", \"{{$randomNoun}}\")",
+											"pm.collectionVariables.set(\"variant_type_name_am\", \"{{$randomNoun}}\")",
+											"pm.collectionVariables.set(\"variant_type_unit\", \"{{$randomNoun}}\")"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "942fb95a-d305-48e8-82bf-fb27b5f777b9",
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {",
+											"  pm.response.to.have.status(201);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"names\": {\n        \"en\": \"{{variant_type_name_en}}\",\n        \"am\": \"{{variant_type_name_am}}\"\n    },\n    \"unit\": \"{{variant_type_unit}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:60003/api/v1/variant-types",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60003",
+									"path": [
+										"api",
+										"v1",
+										"variant-types"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "variant-types/",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:60003/api/v1/variant-types/5fd3531f8f2525d894544960",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60003",
+									"path": [
+										"api",
+										"v1",
+										"variant-types",
+										"5fd3531f8f2525d894544960"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "variant-types/",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "6a5e7691-1675-4c70-8f0f-74cbee24ed88",
+										"exec": [
+											"// Login",
+											"pm.sendRequest({",
+											"    url: pm.environment.get(\"API_GATEWAY_URL\") + \"/api/v1/sessions\",",
+											"    method: 'POST',",
+											"    header: { 'content-type': 'application/json' },",
+											"    body: {",
+											"        mode: 'raw',",
+											"        raw: JSON.stringify({",
+											"            identity: 'admin0@localhost.com',",
+											"            password: 'admin'",
+											"        })",
+											"    }",
+											"}, function (err, res) {",
+											"    // Set Authorization Header",
+											"    pm.variables.set('token', res.json().data.token);",
+											"});",
+											"",
+											"pm.collectionVariables.set(\"variant_type_name_en\", \"{{$randomNoun}}\")",
+											"pm.collectionVariables.set(\"variant_type_name_am\", \"{{$randomNoun}}\")",
+											"pm.collectionVariables.set(\"variant_type_unit\", \"{{$randomNoun}}\")"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "11282bb2-742f-4eaf-9e61-f4380c788b02",
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {",
+											"  pm.response.to.have.status(201);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"names\": {\n        \"en\": \"{{variant_type_name_en}}\",\n        \"am\": \"{{variant_type_name_am}}\"\n    },\n    \"unit\": \"{{variant_type_unit}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:60003/api/v1/variant-types/5fd3531f8f2525d894544960",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60003",
+									"path": [
+										"api",
+										"v1",
+										"variant-types",
+										"5fd3531f8f2525d894544960"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "variant-types/",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:60003/api/v1/variant-types/5fd3531f8f2525d894544960",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60003",
+									"path": [
+										"api",
+										"v1",
+										"variant-types",
+										"5fd3531f8f2525d894544960"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "products",
+					"item": [
+						{
+							"name": "products",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://127.0.0.1:60003/api/v1/products",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60003",
+									"path": [
+										"api",
+										"v1",
+										"products"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "products",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"id": "d47fee93-d660-4114-af75-5f8a03ebd055",
+										"exec": [
+											"// Login",
+											"pm.sendRequest({",
+											"    url: pm.environment.get(\"API_GATEWAY_URL\") + \"/api/v1/sessions\",",
+											"    method: 'POST',",
+											"    header: { 'content-type': 'application/json' },",
+											"    body: {",
+											"        mode: 'raw',",
+											"        raw: JSON.stringify({",
+											"            identity: 'admin0@localhost.com',",
+											"            password: 'admin'",
+											"        })",
+											"    }",
+											"}, function (err, res) {",
+											"    // Set Authorization Header",
+											"    pm.variables.set('token', res.json().data.token);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"id": "468d66df-1510-4318-8016-b5dab67ffa2e",
+										"exec": [
+											"pm.test(\"Status code is 201\", function () {",
+											"  pm.response.to.have.status(201);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"names\": {\n        \"en\": \"{{product_name_en}}\",\n        \"am\": \"{{product_name_am}}\"\n    },\n    \"descriptions\": {\n        \"en\": \"sfdddddddddddddddddddddddddddddddddddddddd\",\n        \"am\": \"sfdddddddddddddddddddddddddddddddddddddddd\"\n    },\n    \"variants\": [\n        {\n            \"variant_type_id\": \"5fd478346e35c6575938c892\",\n            \"value\": \"sdf\",\n            \"additional_amount\": \"50\"\n        }\n    ],\n    \"category_id\": \"5fd4784b6e35c6575938c893\",\n    \"store_id\": \"jhgfdgiuytfrdfg\",\n    \"images\": {\n        \"height\": 100,\n        \"width\": 100,\n        \"priority\": 1,\n        \"src\": \"dd\"\n    },\n    \"pricing\": {\n        \"price\": 50.05\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://127.0.0.1:60003/api/v1/products",
+									"protocol": "http",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "60003",
+									"path": [
+										"api",
+										"v1",
+										"products"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"event": [
@@ -2099,183 +2616,208 @@
 	],
 	"variable": [
 		{
-			"id": "8595a02f-8b5d-4d7f-ae79-09fa8b79c47e",
+			"id": "210e4c59-716a-42ad-bb8e-34b52e2d5622",
 			"key": "role_name",
 			"value": ""
 		},
 		{
-			"id": "4a197e74-2c2e-4ecf-a478-3ebce0671299",
+			"id": "6878328b-f16c-4e66-ba14-5076cdbbc0a2",
 			"key": "role_uti",
 			"value": ""
 		},
 		{
-			"id": "ff192f33-0577-4650-a619-ab3930d7b969",
+			"id": "28a7923b-e062-47a5-9d8f-ac11a36de8b4",
 			"key": "roles_permissions",
 			"value": ""
 		},
 		{
-			"id": "735e0dd1-3256-4da2-8160-3e74a2f59856",
+			"id": "09e6ce76-f0a6-4b7d-807b-655d8aed48c9",
 			"key": "user_email",
 			"value": ""
 		},
 		{
-			"id": "aa99e0df-67be-4dfd-a474-98ade18ec2a9",
+			"id": "b92ff24f-8773-4467-9744-596b8a3fd599",
 			"key": "user_identity",
 			"value": ""
 		},
 		{
-			"id": "fafa5afb-82f1-4a8a-9259-2d8e625006f7",
+			"id": "6f3cae61-67fa-433b-93e5-dbb37b0e4085",
 			"key": "user_name",
 			"value": ""
 		},
 		{
-			"id": "cb62510e-2ad2-4dcc-914b-f9a40f3e45b1",
+			"id": "7827d2dc-4104-4524-b7c3-92b4cc2d0b9b",
 			"key": "user_password",
 			"value": ""
 		},
 		{
-			"id": "f29e85af-2a05-443b-b179-361a6e177a9c",
+			"id": "c9f1d893-4605-45db-a323-c71fb625aa7a",
 			"key": "user_pnum",
 			"value": ""
 		},
 		{
-			"id": "c8dfff55-095d-4f8a-8a1a-698ff8a474d2",
+			"id": "276d8cad-b699-418a-adc1-51ec03159d86",
 			"key": "user_uti",
 			"value": ""
 		},
 		{
-			"id": "c967ba71-8a7c-496a-8c0f-4b53cb93ba19",
+			"id": "8a7f16ce-ab6a-4746-8d72-d06a124ef70d",
 			"key": "user_fullname",
 			"value": ""
 		},
 		{
-			"id": "b0947e3f-e56a-4699-b2b6-0134d310c177",
+			"id": "4071e9fc-ee94-40f9-affc-4a15f429e893",
 			"key": "branch_name_am",
 			"value": ""
 		},
 		{
-			"id": "dd751b65-753a-4a00-a666-50b80125c1ef",
+			"id": "994de154-9035-4ba5-accb-6ba2cd70d37a",
 			"key": "branch_name_en",
 			"value": ""
 		},
 		{
-			"id": "d5462899-14f1-45b0-bd06-8660131d7506",
+			"id": "3e840967-4993-48b8-8c41-b42f97622b15",
 			"key": "branch_woreda",
 			"value": ""
 		},
 		{
-			"id": "08a14d85-fa8f-479c-9afa-953f880559a6",
+			"id": "13bf0851-5e83-46be-8041-ad4ba684eedc",
 			"key": "branch_gps",
 			"value": ""
 		},
 		{
-			"id": "a3cde1b3-0a8c-4fef-ba52-76cf2d3df401",
+			"id": "3fce8bce-7f77-4abf-9c96-64eef1223af9",
 			"key": "branch_house_no",
 			"value": ""
 		},
 		{
-			"id": "d889535d-1922-4108-b1e8-4bdebbe16a85",
+			"id": "ab2b4343-2967-4f7f-8c6a-b7c53964851e",
 			"key": "branch_kebele",
 			"value": ""
 		},
 		{
-			"id": "49a5569c-deb1-404a-bd3b-2017a9ec8cb6",
+			"id": "fcc4aac6-22e8-414d-9a12-38113fb0d358",
 			"key": "branch_manager_id",
 			"value": ""
 		},
 		{
-			"id": "e6dc14dc-e7f8-4c7e-bc57-8872dd0ba225",
+			"id": "79ff1d41-5926-491d-9a6b-5e2fdd02d85a",
 			"key": "branch_company",
 			"value": ""
 		},
 		{
-			"id": "e7efc3be-b08d-485c-b0d8-e678d028b043",
+			"id": "36dfc56f-2438-46cc-856d-4bff3cba7f84",
 			"key": "permission_create",
 			"value": ""
 		},
 		{
-			"id": "0db7b9b3-c613-4479-b4bf-fbbeea54680d",
+			"id": "2d6d23b8-f37b-4773-b2b5-055e2fe689f2",
 			"key": "permission_delete",
 			"value": ""
 		},
 		{
-			"id": "6b376d6e-d0a2-4b51-98c1-a67e939375e5",
+			"id": "2bee7119-8544-47d7-84e3-d858aef963dd",
 			"key": "permission_key",
 			"value": ""
 		},
 		{
-			"id": "5014fd28-5af3-47ae-9db5-754979d55d79",
+			"id": "25dcd679-3b4c-44f1-ab07-a98c2cbd5264",
 			"key": "permission_name",
 			"value": ""
 		},
 		{
-			"id": "a3e8cbf1-a431-495c-8c21-59acdba66733",
+			"id": "08829744-a759-4678-a672-a3a3e72e73f4",
 			"key": "permission_read",
 			"value": ""
 		},
 		{
-			"id": "9a8bd75a-ef71-482a-b547-ddc510dc3516",
+			"id": "096da1c8-9541-4498-987c-498d71d26000",
 			"key": "permission_update",
 			"value": ""
 		},
 		{
-			"id": "a40a5701-d380-4bbf-bdbe-237aac5ebed5",
+			"id": "7b5e79f3-f7e0-48b1-b469-26d65a821a72",
 			"key": "cart_item_product_id",
 			"value": ""
 		},
 		{
-			"id": "00087fb8-4830-4741-b3b6-fd650f536e69",
+			"id": "ea35b304-94ea-445e-b8ec-da84ff0efac3",
 			"key": "cart_item_quantity",
 			"value": ""
 		},
 		{
-			"id": "bd9dee97-b046-4d7f-bb63-6ed46c01d218",
+			"id": "81cf4d49-07bf-4018-983a-e81c9443d35f",
 			"key": "payment_invoice_number",
 			"value": ""
 		},
 		{
-			"id": "75a1d696-b8f3-487d-9653-174e105100f7",
+			"id": "0cfe80f6-3ab7-4d1f-af8e-9299ba4dbf78",
 			"key": "payment_transaction_date",
 			"value": ""
 		},
 		{
-			"id": "1b9c6216-a468-45b9-84a2-9745e7539052",
+			"id": "ca089d46-e6d8-4cc9-9a0e-7ba54ca87b22",
 			"key": "payment_transaction_id",
 			"value": ""
 		},
 		{
-			"id": "24b074e2-8913-4bd4-925e-c06840b8364b",
+			"id": "d6b00ead-610a-4494-970f-3125e166fe1d",
 			"key": "payment_transaction_medium",
 			"value": ""
 		},
 		{
-			"id": "c733cb67-b08e-41d4-ab65-c368a53396c5",
+			"id": "ad0e8998-3b1b-49e7-9868-299473459584",
 			"key": "transaction_amount",
 			"value": ""
 		},
 		{
-			"id": "30e2fb3d-a9d5-4cbb-97a2-17b42ded7f7b",
+			"id": "22fdf8f0-eada-4dc7-bd9a-a5b5a156252a",
 			"key": "transaction_flag",
 			"value": ""
 		},
 		{
-			"id": "26df8e8f-2d15-418e-83ec-181eb6f8540b",
+			"id": "205661c0-d750-4d20-9073-6fc45bddbc5b",
 			"key": "transaction_invoice_number",
 			"value": ""
 		},
 		{
-			"id": "a7f664a9-1a57-4d57-8f7f-6c1bfab5e8df",
+			"id": "842b3d9e-34c9-4d00-947b-0e0e6b73bdd1",
 			"key": "transaction_transaction_date",
 			"value": ""
 		},
 		{
-			"id": "74669f88-9112-4312-bc42-cba3cb925d5b",
+			"id": "91dabc75-05a8-4a75-ba9f-dde87cce7362",
 			"key": "transaction_transaction_id",
 			"value": ""
 		},
 		{
-			"id": "75242fa3-9ad5-469b-84e1-4521769a6c6d",
+			"id": "e85e07f9-5ee5-417e-8194-62162cb4d0b0",
 			"key": "transaction_transaction_medium",
+			"value": ""
+		},
+		{
+			"id": "121ef97c-4d95-4af4-929c-4b0ecdab4198",
+			"key": "category_name_am",
+			"value": ""
+		},
+		{
+			"id": "df4452ea-6bbc-4579-ac09-52ab13c911d1",
+			"key": "category_name_en",
+			"value": ""
+		},
+		{
+			"id": "55710930-2ae7-43cc-b391-6818990aa423",
+			"key": "variant_type_name_am",
+			"value": ""
+		},
+		{
+			"id": "98449152-1f88-4127-b931-d3498cd22554",
+			"key": "variant_type_name_en",
+			"value": ""
+		},
+		{
+			"id": "bacc50d0-1c5f-486f-bfd4-cb4f84319efb",
+			"key": "variant_type_unit",
 			"value": ""
 		}
 	],
