@@ -8,7 +8,8 @@
     "permission": "node permissions.js",
     "role": "node roles.js",
     "user": "node users.js",
-    "start": "npm run permission && npm run role && npm run user"
+    "category": "node categories.js",
+    "start": "npm run permission && npm run role && npm run user && npm run category"
   },
   "author": "",
   "license": "ISC",
