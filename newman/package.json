@@ -8,8 +8,9 @@
     "permission": "node permissions.js",
     "role": "node roles.js",
     "user": "node users.js",
+    "variant": "node variant_types.js",
     "category": "node categories.js",
-    "start": "npm run permission && npm run role && npm run user && npm run category"
+    "start": "npm run permission && npm run role && npm run user && npm run variant && npm run category"
   },
   "author": "",
   "license": "ISC",

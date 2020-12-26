@@ -2198,7 +2198,7 @@
 								"method": "DELETE",
 								"header": [],
 								"url": {
-									"raw": "http://127.0.0.1:60003/api/v1/categories/5fd3162e18f441addb831667",
+									"raw": "http://127.0.0.1:60003/api/v1/categories/5fe6ed3dd3723b4f9217afd5",
 									"protocol": "http",
 									"host": [
 										"127",
@@ -2211,7 +2211,7 @@
 										"api",
 										"v1",
 										"categories",
-										"5fd3162e18f441addb831667"
+										"5fe6ed3dd3723b4f9217afd5"
 									]
 								}
 							},
@@ -2249,7 +2249,7 @@
 							"response": []
 						},
 						{
-							"name": "variant-types",
+							"name": "variant-types - post",
 							"event": [
 								{
 									"listen": "prerequest",
@@ -2616,207 +2616,207 @@
 	],
 	"variable": [
 		{
-			"id": "ef36cfd4-916a-458f-8c20-734148dc6d99",
+			"id": "e4e83393-a8dd-4c3d-a11a-f70d0b8748bb",
 			"key": "role_name",
 			"value": ""
 		},
 		{
-			"id": "51f89e5a-5c56-4df5-b340-a9be43ba2195",
+			"id": "3fa8cd2e-6809-4a5a-a868-460c0f5fd6bf",
 			"key": "role_uti",
 			"value": ""
 		},
 		{
-			"id": "d9ba6d21-446c-4d89-9404-2d007d6f6557",
+			"id": "dd779847-0c11-489c-9db4-13906a1d7289",
 			"key": "roles_permissions",
 			"value": ""
 		},
 		{
-			"id": "723734d4-1698-4e2b-841c-ef3d6af752ed",
+			"id": "f6922e29-3138-42fe-9907-8926ff572309",
 			"key": "user_email",
 			"value": ""
 		},
 		{
-			"id": "3355b874-64dc-4235-9144-4060832a0e0e",
+			"id": "27ea31c9-6a3a-47b3-8549-47f7ea856653",
 			"key": "user_identity",
 			"value": ""
 		},
 		{
-			"id": "5e270def-18fb-4b59-871b-1157aa46ca86",
+			"id": "908928ea-5a70-4bf1-bb66-fcb0b9b1c3be",
 			"key": "user_name",
 			"value": ""
 		},
 		{
-			"id": "eb58732c-af45-4ea1-bb5d-c3a0a7e4a5e0",
+			"id": "bd461b09-ac37-4f66-b50c-daee36b401c1",
 			"key": "user_password",
 			"value": ""
 		},
 		{
-			"id": "c852c43f-6d09-409e-b440-1c9ee8263ef0",
+			"id": "5454b670-33fb-43d1-89e8-8dd3eae84c06",
 			"key": "user_pnum",
 			"value": ""
 		},
 		{
-			"id": "2dd4d514-6167-478a-bc46-7712e8c6674f",
+			"id": "9aefa146-1c78-43c2-9526-4e37bf634759",
 			"key": "user_uti",
 			"value": ""
 		},
 		{
-			"id": "19a86463-81df-4eed-a2d8-a033245b1a74",
+			"id": "de9641d4-2ff1-4c39-998f-e263d1bee29b",
 			"key": "user_fullname",
 			"value": ""
 		},
 		{
-			"id": "e7f0de14-7dff-41e8-b5f6-f85dda7c1955",
+			"id": "482b794b-af7f-4b1a-8d94-898002fee956",
 			"key": "branch_name_am",
 			"value": ""
 		},
 		{
-			"id": "013f92f9-5969-48e4-99db-984ccf05aff2",
+			"id": "e5c1c001-0a86-43d4-b6d7-51b3d522c9b7",
 			"key": "branch_name_en",
 			"value": ""
 		},
 		{
-			"id": "0e623371-ddbd-41a3-82ad-2561fc843e7d",
+			"id": "20561de5-e1a2-4c67-b87b-bfb59a13e08b",
 			"key": "branch_woreda",
 			"value": ""
 		},
 		{
-			"id": "9fc6ab90-d335-4f0b-b821-a38e1cbd8589",
+			"id": "19b947a1-73c9-4f86-9748-f13333279e20",
 			"key": "branch_gps",
 			"value": ""
 		},
 		{
-			"id": "bd21c11e-4f5e-4fac-b851-51eb154d280d",
+			"id": "861b1e8c-7a84-4cfa-b79c-255c813339f7",
 			"key": "branch_house_no",
 			"value": ""
 		},
 		{
-			"id": "83cb9a99-c8dc-429b-8f2f-24be1c6c40d0",
+			"id": "43c29aab-8be1-44e9-bc62-5b52b9671461",
 			"key": "branch_kebele",
 			"value": ""
 		},
 		{
-			"id": "e7ee56b8-cbb7-4b6b-b5ca-bf8c112a9775",
+			"id": "62505c76-4962-4104-a2b0-5c64cbe1d8bf",
 			"key": "branch_manager_id",
 			"value": ""
 		},
 		{
-			"id": "be1f4129-e6f4-4b5a-b66c-67b9d7d621d2",
+			"id": "558f6de6-74de-415a-bf29-1647610cb8ba",
 			"key": "branch_company",
 			"value": ""
 		},
 		{
-			"id": "b879291a-7f53-49bf-ac2c-a82d68312f46",
+			"id": "918ca389-0869-47b9-bb3e-e0f2a9aa6d0c",
 			"key": "permission_create",
 			"value": ""
 		},
 		{
-			"id": "b3284dc8-fb89-4da5-8609-b2dbcedb5274",
+			"id": "7ee45403-ab25-4822-80ea-3c327ca486a3",
 			"key": "permission_delete",
 			"value": ""
 		},
 		{
-			"id": "42dc8eb9-af02-4a19-9f5d-993e0943bae6",
+			"id": "e6b1046e-cd58-4f80-8694-1ce5bae6147e",
 			"key": "permission_key",
 			"value": ""
 		},
 		{
-			"id": "94d78ecd-6085-455a-b90c-9f821a507f73",
+			"id": "243345b9-ca07-4c57-a169-5cf081619543",
 			"key": "permission_name",
 			"value": ""
 		},
 		{
-			"id": "aa9871ac-2625-426b-b65f-804a14de0720",
+			"id": "be706512-a78a-472b-9bef-874d8fb0c9ba",
 			"key": "permission_read",
 			"value": ""
 		},
 		{
-			"id": "6d4117dc-730a-479d-a49f-b6ec67359608",
+			"id": "3864c423-57c1-4a27-9655-320138bb5284",
 			"key": "permission_update",
 			"value": ""
 		},
 		{
-			"id": "1b1f59df-f0fb-4cc9-a999-364569fcb58a",
+			"id": "47de6306-a525-44f2-a51a-8922ca37f4e9",
 			"key": "cart_item_product_id",
 			"value": ""
 		},
 		{
-			"id": "b449fe9b-5e03-49c2-8b92-303202af928f",
+			"id": "000e1692-f922-4ccd-8050-866adfdc14a3",
 			"key": "cart_item_quantity",
 			"value": ""
 		},
 		{
-			"id": "c2d9d284-55f0-43a2-885d-d105bdb1df6e",
+			"id": "e0e3f51b-2357-4a71-8f08-475aa24f9826",
 			"key": "payment_invoice_number",
 			"value": ""
 		},
 		{
-			"id": "4593d272-694c-492b-bbd4-51ee3a5379d8",
+			"id": "ab78271f-6040-4914-a2fb-ee8c808a3cc1",
 			"key": "payment_transaction_date",
 			"value": ""
 		},
 		{
-			"id": "8acc482a-4511-4f86-abc5-d51040b80c50",
+			"id": "2928acd7-8cd7-4109-a9c5-2c5d32c9055f",
 			"key": "payment_transaction_id",
 			"value": ""
 		},
 		{
-			"id": "7aa2d4fa-0085-4a16-93e3-414fe03dd301",
+			"id": "2b796134-14c0-475e-bbff-ebb9d4f8f736",
 			"key": "payment_transaction_medium",
 			"value": ""
 		},
 		{
-			"id": "702fb7cb-6383-4a3e-ab74-649bc6311f1e",
+			"id": "ee79aaf2-0d57-4d9d-8b10-36fb6ae0a1e1",
 			"key": "transaction_amount",
 			"value": ""
 		},
 		{
-			"id": "b5d95db0-64c4-411d-ac24-46cfa0afcff4",
+			"id": "997438c1-3ace-4fd2-a8f4-4316cde03dc0",
 			"key": "transaction_flag",
 			"value": ""
 		},
 		{
-			"id": "86c7f8f2-70cd-425b-9133-85588151cf37",
+			"id": "cb0993b2-a10d-4bf1-a8c0-bc97d49fbdeb",
 			"key": "transaction_invoice_number",
 			"value": ""
 		},
 		{
-			"id": "e7f82fce-137a-4fd9-83c2-9dddc5507e30",
+			"id": "b8a3404f-2156-4895-a04e-c2eaca869ffb",
 			"key": "transaction_transaction_date",
 			"value": ""
 		},
 		{
-			"id": "bd61fd98-b5bb-4a1c-8d8c-3c1449b93e40",
+			"id": "1402eb36-16d6-43ab-95df-bd2fe4a225d2",
 			"key": "transaction_transaction_id",
 			"value": ""
 		},
 		{
-			"id": "9ce222f5-cba9-4bd5-a1ae-f9d30972e8ac",
+			"id": "6fa3aa7b-b6f8-495f-847c-8974640eeb1d",
 			"key": "transaction_transaction_medium",
 			"value": ""
 		},
 		{
-			"id": "36c30b65-f0c1-4848-8d83-e1e6b9e06ebb",
+			"id": "3e4c49df-6872-4012-9ed5-ae974715d689",
 			"key": "category_name_am",
 			"value": ""
 		},
 		{
-			"id": "6f770270-8729-4f12-bfe6-0bf4bcff1269",
+			"id": "178e90cd-8b6f-4d48-8574-0504690d0f71",
 			"key": "category_name_en",
 			"value": ""
 		},
 		{
-			"id": "70605167-921d-450c-9722-73d6f594b814",
+			"id": "e092f0b2-6775-424a-b835-cbb03e5c348d",
 			"key": "variant_type_name_am",
 			"value": ""
 		},
 		{
-			"id": "ad19d401-7a06-40b1-a16e-9b33dda50c87",
+			"id": "aecb9981-dac0-4157-9a83-a1e63a2881ed",
 			"key": "variant_type_name_en",
 			"value": ""
 		},
 		{
-			"id": "7b1d5241-6645-4c28-a8c4-ed2697ead708",
+			"id": "9d28eb5d-c3a8-4591-a9da-15d7d0bd5f1f",
 			"key": "variant_type_unit",
 			"value": ""
 		}
